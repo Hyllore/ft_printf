@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/01/18 12:11:24 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/19 16:48:37 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-int	ft_printf(const char * restrict format/*, ...*/);
+typedef	struct		s_printf
+{
+	char			*content;
+	struct s_printf	*next;
+}					t_printf;
+
+int	ft_printf(const char *format, ...);
 
 #endif
