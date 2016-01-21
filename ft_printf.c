@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/20 16:52:37 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/21 13:35:29 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int			search_types(const char *format)
 				i++;
 				ret = percent_int(format, i, ret);
 				ret = percent_char_str_ptr(format, i, ret);
+				i++;
 			}
+		if (format[i] != '%')
+			ft_putchar(format[i]);
 		i++;
 	}
 	return(ret);
@@ -55,12 +58,9 @@ void	apply_types(int ret, va_list argptr, ...)
 	char ptr;
 	if (ret == 6)
 	{
-		ft_putchar('1');
 		ptr = va_arg(argptr, int);
-		ft_putchar('2');
 	}
 	va_end(argptr);
-	ft_putchar('3');
 	ft_putchar(ptr);
 }
 
@@ -72,14 +72,11 @@ int			ft_printf(const char *format, ...)
 
 	ret = 0;
 	i = count_percent(format);
-	ft_putnbr(i);
-	ft_putchar(' ');
 	va_start(argptr, format);
 	while (i > 0)
 	{
 		ret = 0;
 		ret = search_types(format);
-		ft_putnbr(ret);
 		if (ret == 0)
 			return (0);
 		apply_types(ret, argptr);
