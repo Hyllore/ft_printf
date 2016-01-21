@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/21 13:35:29 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/21 16:55:36 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int			search_types(const char *format)
 				ret = percent_char_str_ptr(format, i, ret);
 				i++;
 			}
-		if (format[i] != '%')
-			ft_putchar(format[i]);
 		i++;
 	}
 	return(ret);
@@ -55,13 +53,30 @@ int			search_types(const char *format)
 
 void	apply_types(int ret, va_list argptr, ...)
 {
-	char ptr;
+	char c;
+	char *ptr;
+	int num;
+
+	num = 0;
 	if (ret == 6)
 	{
-		ptr = va_arg(argptr, int);
+		c = va_arg(argptr, int);
+		va_end(argptr);
+		ft_putchar(c);
 	}
-	va_end(argptr);
-	ft_putchar(ptr);
+	if (ret == 7)
+	{
+		ptr = va_arg(argptr, char*);
+		va_end(argptr);
+		ft_putstr(ptr);
+	}
+	if (ret == 1)
+	{
+		num = va_arg(argptr, int);
+		va_end(argptr);
+		ptr = ft_itoa(num);
+		ft_putstr(ptr);
+	}
 }
 
 int			ft_printf(const char *format, ...)
@@ -69,12 +84,19 @@ int			ft_printf(const char *format, ...)
 	va_list	argptr;
 	int		i;
 	int		ret;
+	static int i2 = 0;
 
 	ret = 0;
 	i = count_percent(format);
 	va_start(argptr, format);
 	while (i > 0)
 	{
+		while (format[i2] != '%' && format[i2] != '\0')
+		{
+			ft_putchar(format[i2]);
+			i2++;
+		}
+		i2 += 2;
 		ret = 0;
 		ret = search_types(format);
 		if (ret == 0)
@@ -87,6 +109,6 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	if (ft_printf("%c %c %c" , 'e', 'f', 'k') == 0)
+	if (ft_printf("bonjour %d je m'appelle %c dorian %s" , 42, 'f', "merci") == 0)
 		ft_putendl("error");
 }
