@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/01/21 13:35:32 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/22 16:52:48 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,26 @@ int		percent_char_str_ptr(const char *format, int i, int ret)
 	if (format[i] == 'p')
 		ret = 8;
 	return (ret);
+}
+
+void	p_adress(va_list ap)
+{
+	unsigned int  adr;
+	char          *base;
+	char          res[9];
+	int           i;
+
+	adr = va_arg(ap, unsigned int);
+	base = "0123456789abcdef";
+	i = 8;
+	while ((adr / 16) > 0)
+	{
+		res[i] = base[(adr % 16)];
+		adr /= 16;
+		i--;
+	}
+	res[i] = base[(adr % 16)];
+	ft_putstr("0x10");
+	while (i < 9)
+		ft_putchar(res[i++]);
 }

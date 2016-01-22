@@ -6,11 +6,12 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/21 16:55:36 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/22 16:27:21 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int			count_percent(const char *str)
 {
@@ -56,6 +57,8 @@ void	apply_types(int ret, va_list argptr, ...)
 	char c;
 	char *ptr;
 	int num;
+	void *ad;
+	unsigned int u;
 
 	num = 0;
 	if (ret == 6)
@@ -75,6 +78,18 @@ void	apply_types(int ret, va_list argptr, ...)
 		num = va_arg(argptr, int);
 		va_end(argptr);
 		ptr = ft_itoa(num);
+		ft_putstr(ptr);
+	}
+	if (ret == 8)
+	{
+		p_adress(argptr);
+		va_end(argptr);
+	}
+	if (ret == 2)
+	{
+		u = va_arg(argptr, unsigned int);
+		va_end(argptr);
+		ptr = ft_itoa_u((float)u);
 		ft_putstr(ptr);
 	}
 }
@@ -109,6 +124,10 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	if (ft_printf("bonjour %d je m'appelle %c dorian %s" , 42, 'f', "merci") == 0)
+	char *ptr;
+
+	ptr = "hey";
+	if (ft_printf("%p bonjour %d je %u m'appelle %c dorian %s", ptr, 42, -2, 'f', "merci") == 0)
 		ft_putendl("error");
+	printf("\n%u" , -2);
 }

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:09:59 by droly             #+#    #+#             */
-/*   Updated: 2015/12/14 10:28:49 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/22 16:51:39 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*ft_itoa_u(unsigned int n);
 void				ft_putstr(char *str);
 void				ft_putchar(char c);
 char				*ft_strcpy(char *dest, const char *src);
