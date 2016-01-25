@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:47:04 by droly             #+#    #+#             */
-/*   Updated: 2016/01/22 16:51:54 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/25 12:03:46 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ char				*ft_itoa_u(unsigned int n)
 {
 	char			*str;
 	unsigned int	i;
-	float			k;
+	int	k;
 
-	k = (float)n;
+	k = (int)n;
 //	if ((str = ft_exeption(n)))
 //		return (str);
 	if (k < 0)
@@ -80,7 +80,7 @@ char				*ft_itoa_u(unsigned int n)
 		k = 4294967296 + k;
 	}
 	else
-		i = ft_strlen_num(k);
+	i = ft_strlen_num(k);
 	if (!(str = (char *)malloc(sizeof(char) * (1 + i))))
 		return (NULL);
 	str[i] = '\0';

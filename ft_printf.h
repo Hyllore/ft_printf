@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/01/22 13:42:22 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/25 18:27:23 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-//typedef	struct		s_printf
-//{
-//	char			*content;
-//	struct s_printf	*next;
-//}					t_printf;
+typedef	struct		s_flags
+{
+	int			diese;
+	int			zero;
+	int			minus;
+	int			plus;
+	int			space;
+}					t_flags;
+
+typedef	struct		s_printf
+{
+	t_flags		*f;
+	int			field;
+	int			precision;
+	int			len_modif;
+	char		type;
+}					t_printf;
 
 int	ft_printf(const char *format, ...);
 int	percent_int(const char *format, int i, int ret);

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/22 16:27:21 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/25 18:27:21 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,17 @@ int			count_percent(const char *str)
 
 int			search_types(const char *format)
 {
-	static	int i = 0;
 	int		ret;
 
-	ret = 0;
-	while (ret == 0)
+	if (format[0] == '%' && format[0 + 1] != '%')
 	{
-		if (format[i] == '%' && format[i + 1] != '%')
-			{
-				i++;
-				ret = percent_int(format, i, ret);
-				ret = percent_char_str_ptr(format, i, ret);
-				i++;
-			}
-		i++;
+		ret = percent_int(format, 1, ret);
+		ret = percent_char_str_ptr(format, 1, ret);
 	}
 	return(ret);
 }
 
-void	apply_types(int ret, va_list argptr, ...)
+void	apply_types(int ret, va_list *argptr)
 {
 	char c;
 	char *ptr;
@@ -63,43 +55,38 @@ void	apply_types(int ret, va_list argptr, ...)
 	num = 0;
 	if (ret == 6)
 	{
-		c = va_arg(argptr, int);
-		va_end(argptr);
+		c = va_arg(*argptr, int);
 		ft_putchar(c);
 	}
 	if (ret == 7)
 	{
-		ptr = va_arg(argptr, char*);
-		va_end(argptr);
+		ptr = va_arg(*argptr, char*);
 		ft_putstr(ptr);
 	}
 	if (ret == 1)
 	{
-		num = va_arg(argptr, int);
-		va_end(argptr);
-		ptr = ft_itoa(num);
-		ft_putstr(ptr);
+		num = va_arg(*argptr, int);
+		ft_putnbr(num);
 	}
 	if (ret == 8)
 	{
-		p_adress(argptr);
-		va_end(argptr);
+		p_adress(*argptr);
 	}
 	if (ret == 2)
 	{
-		u = va_arg(argptr, unsigned int);
-		va_end(argptr);
-		ptr = ft_itoa_u((float)u);
-		ft_putstr(ptr);
+		u = va_arg(*argptr, unsigned int);
+		ft_putnbr_u(u);
+//		ptr = ft_itoa_u(u);
+//		ft_putstr(ptr);
 	}
 }
 
-int			ft_printf(const char *format, ...)
+/*int			ft_printf(const char *format, ...)
 {
 	va_list	argptr;
 	int		i;
 	int		ret;
-	static int i2 = 0;
+	int i2 = 0;
 
 	ret = 0;
 	i = count_percent(format);
@@ -111,23 +98,64 @@ int			ft_printf(const char *format, ...)
 			ft_putchar(format[i2]);
 			i2++;
 		}
-		i2 += 2;
 		ret = 0;
-		ret = search_types(format);
+		ret = search_types(&format[i2]);
 		if (ret == 0)
 			return (0);
-		apply_types(ret, argptr);
+		apply_types(ret, &argptr);
 		i--;
 	}
+	va_end(argptr);
 	return (1);
+}*/
+
+int	seek_types(int i, char *format, ...)
+{
+	t_printf *lst;
+
+	
 }
+
+int			ft_printf(const char *format, ...)
+{
+	va_list	argptr;
+	int		i;
+	int		ret;
+	int i2 = 0;
+
+	ret = 0;
+	va_start(argptr, format);
+	while (format[i] != '\0')
+	{
+		if (format[i] == '%' && format[i + 1] == '%')
+		{
+			ft_putchar('%');
+			i += 2;
+		}
+		if (format[i] == '%')
+		{
+			seek_types(i, format, ...);
+		}
+		ft_putchar(format[i]);
+		i++;
+	}
+}
+
+#include <limits.h>
+
+#define aprintf(...) printf(": [%d] printf\n", printf(__VA_ARGS__));\
+						printf(": [%d] ft_printf\n", ft_printf(__VA_ARGS__))
 
 int			main(void)
 {
 	char *ptr;
 
 	ptr = "hey";
-	if (ft_printf("%p bonjour %d je %u m'appelle %c dorian %s", ptr, 42, -2, 'f', "merci") == 0)
-		ft_putendl("error");
-	printf("\n%u" , -2);
+//	if (ft_printf("%p bonjour %d je %u m'appelle %c dorian %s", ptr, 42, INT_MIN -1, 'f', "merci") == 0)
+//		ft_putendl("error");
+	aprintf("%u" , 0);
+	aprintf("%u" , INT_MAX);
+	aprintf("%u" , -1);
+	aprintf("%u" , INT_MIN -1);
+	aprintf("%d" , INT_MAX + 1);
 }
