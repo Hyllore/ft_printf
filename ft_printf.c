@@ -6,13 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/25 18:27:21 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/26 17:50:06 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-
+/*
 int			count_percent(const char *str)
 {
 	int		i;
@@ -81,7 +81,7 @@ void	apply_types(int ret, va_list *argptr)
 	}
 }
 
-/*int			ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list	argptr;
 	int		i;
@@ -109,11 +109,36 @@ void	apply_types(int ret, va_list *argptr)
 	return (1);
 }*/
 
-int	seek_types(int i, char *format, ...)
+int		seek_field(t_printf *lst, const char *format, int i)
+{
+
+	return (i);
+}
+
+int		seek_flags(t_flags *lst2, const char *format, int  i)
+{
+	char *t;
+
+	while ((t = strchr("#0-+ ", format[i])) != NULL)
+	{
+		lst2->diese = t[0] == '#';
+		lst2->zero = t[0] == '0';
+		lst2->minus = t[0] == '-';
+		lst2->plus = t[0] == '+';
+		lst2->space = t[0] == ' ';
+		i++;
+	}
+	return (i);
+}
+
+int	seek_types(int i, const char *format, ...)
 {
 	t_printf *lst;
+	t_flags *lst2;
 
-	
+	i = seek_flags(lst2, format, i);
+	i = seek_field(lst, format, i);
+	return (i);
 }
 
 int			ft_printf(const char *format, ...)
@@ -121,8 +146,9 @@ int			ft_printf(const char *format, ...)
 	va_list	argptr;
 	int		i;
 	int		ret;
-	int i2 = 0;
+	int i2;
 
+	i2 = 0;
 	ret = 0;
 	va_start(argptr, format);
 	while (format[i] != '\0')
@@ -134,11 +160,13 @@ int			ft_printf(const char *format, ...)
 		}
 		if (format[i] == '%')
 		{
-			seek_types(i, format, ...);
+			i++;
+			seek_types(i, format);
 		}
 		ft_putchar(format[i]);
 		i++;
 	}
+	return (/*nombre de caractere imprimee*/);
 }
 
 #include <limits.h>
