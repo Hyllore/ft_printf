@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/26 17:50:06 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/27 16:53:09 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,10 @@ int			ft_printf(const char *format, ...)
 
 int		seek_field(t_printf *lst, const char *format, int i)
 {
-
+	if (format[i] >= '0' && format[i] <= '9')
+	{
+		lst->field = ft_atoi((char*)&format[i]);
+	}
 	return (i);
 }
 
@@ -138,6 +141,7 @@ int	seek_types(int i, const char *format, ...)
 
 	i = seek_flags(lst2, format, i);
 	i = seek_field(lst, format, i);
+	i = seek_precision(lst, format, i);
 	return (i);
 }
 
@@ -166,7 +170,7 @@ int			ft_printf(const char *format, ...)
 		ft_putchar(format[i]);
 		i++;
 	}
-	return (/*nombre de caractere imprimee*/);
+	return (/*nombre de caractere imprime*/);
 }
 
 #include <limits.h>
