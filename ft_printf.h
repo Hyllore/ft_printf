@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/01/27 16:53:11 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/28 13:29:53 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef	struct		s_printf
 {
 	int			field;
 	int			precision;
-	int			len_modif;
+	char*		len_modif;
 	char		type;
 }					t_printf;
 

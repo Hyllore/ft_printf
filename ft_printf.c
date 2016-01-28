@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/27 16:53:09 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/28 15:30:01 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,48 @@ int			ft_printf(const char *format, ...)
 	return (1);
 }*/
 
-int		seek_field(t_printf *lst, const char *format, int i)
+int		seek_len_modif_types(t_printf *lst, const char *format, int i)
+{
+	char *v;
+	int i2;
+
+	i = 0;
+	while ((v = strchr("hljz", format[i])) != NULL)
+	{
+		lst->len_modif[i2] = format[i];
+		i++;
+		i2++;
+	}
+	if ((v = strchr("sSpdDioOuUxXcC", format[i])) != NULL)
+	{
+		lst->type = format[i];
+		i++;
+	}
+	return (i);
+}
+
+int		seek_field_precision(t_printf *lst, const char *format, int i, va_list argptr)
 {
 	if (format[i] >= '0' && format[i] <= '9')
-	{
 		lst->field = ft_atoi((char*)&format[i]);
+	if (format[i] == '*')
+	{
+		lst->field = va_arg(argptr, int);
+		i++;
+	}
+	while (format[i] >= '0' && format[i] <= '9')
+		i++;
+	if (format[i] == '.' && format[i + 1] >= '0' && format[i + 1] <= '9')
+	{
+		i++;
+		lst->precision = ft_atoi((char*)&format[i]);
+	}
+	while (format[i] >= '0' && format[i] <= '9')
+		i++;
+	if (format[i] == '.' && format[i + 1] == '*')
+	{
+		lst->precision = va_arg(argptr, int);
+		i++;
 	}
 	return (i);
 }
@@ -134,14 +171,17 @@ int		seek_flags(t_flags *lst2, const char *format, int  i)
 	return (i);
 }
 
-int	seek_types(int i, const char *format, ...)
+int	seek_types(int i, const char *format, va_list argptr, ...)
 {
 	t_printf *lst;
 	t_flags *lst2;
-
+	
 	i = seek_flags(lst2, format, i);
-	i = seek_field(lst, format, i);
-	i = seek_precision(lst, format, i);
+	i = seek_field_precision(lst, format, i, argptr);
+	i = seek_len_modif_types(lst, format, i);
+	apply_flags();
+	apply_field_precision();
+	apply_len_modif_types();
 	return (i);
 }
 
@@ -165,7 +205,7 @@ int			ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			seek_types(i, format);
+			seek_types(i, format, argptr);
 		}
 		ft_putchar(format[i]);
 		i++;
