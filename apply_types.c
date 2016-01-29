@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   apply_types.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/27 13:39:03 by droly             #+#    #+#             */
-/*   Updated: 2016/01/29 15:47:33 by droly            ###   ########.fr       */
+/*   Created: 2016/01/29 12:37:22 by droly             #+#    #+#             */
+/*   Updated: 2016/01/29 15:15:32 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-int main()
+#include "ft_printf.h"
+
+void	apply_diese(t_printf *lst, t_flags *lst2, va_list argptr)
 {
-	printf("%p\n" , "bonjour");
+	
 }

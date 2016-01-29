@@ -6,56 +6,82 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/01/22 16:52:48 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/29 15:49:03 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		percent_int(const char *format, int i, int ret)
+int		seek_len_modif_types(t_printf *lst, const char *format, int i)
 {
-	if (format[i] == 'd' || format[i] == 'D' || format[i] == 'i')
-		ret = 1;
-	if (format[i] == 'u' || format[i] == 'U')
-		ret = 2;
-	if (format[i] == 'o' || format[i] == 'O')
-		ret = 3;
-	if (format[i] == 'x')
-		ret = 4;
-	if (format[i] == 'X')
-		ret = 5;
-	return (ret);
-}
+	char *v;
+	int i2;
 
-int		percent_char_str_ptr(const char *format, int i, int ret)
-{
-	if (format[i] == 'c' || format[i] == 'C')
-		ret = 6;
-	if (format[i] == 's' || format[i] == 'S')
-		ret = 7;
-	if (format[i] == 'p')
-		ret = 8;
-	return (ret);
-}
-
-void	p_adress(va_list ap)
-{
-	unsigned int  adr;
-	char          *base;
-	char          res[9];
-	int           i;
-
-	adr = va_arg(ap, unsigned int);
-	base = "0123456789abcdef";
-	i = 8;
-	while ((adr / 16) > 0)
+	i = 0;
+	while ((v = ft_strchr("hljz", format[i])) != NULL)
 	{
-		res[i] = base[(adr % 16)];
-		adr /= 16;
-		i--;
+		lst->len_modif[i2] = format[i];
+		i++;
+		i2++;
 	}
-	res[i] = base[(adr % 16)];
-	ft_putstr("0x10");
-	while (i < 9)
-		ft_putchar(res[i++]);
+	if ((v = ft_strchr("sSpdDioOuUxXcC", format[i])) != NULL)
+	{
+		lst->type = format[i];
+		i++;
+	}
+	return (i);
+}
+
+int		seek_field_precision(t_printf *lst, const char *format, int i, va_list *argptr)
+{
+	if (format[i] >= '0' && format[i] <= '9')
+		lst->field = ft_atoi((char*)&format[i]);
+	if (format[i] == '*')
+	{
+		lst->field = va_arg(argptr, int);
+		i++;
+	}
+	while (format[i] >= '0' && format[i] <= '9')
+		i++;
+	if (format[i] == '.' && format[i + 1] >= '0' && format[i + 1] <= '9')
+	{
+		i++;
+		lst->precision = ft_atoi((char*)&format[i]);
+	}
+	while (format[i] >= '0' && format[i] <= '9')
+		i++;
+	if (format[i] == '.' && format[i + 1] == '*')
+	{
+		lst->precision = va_arg(argptr, int);
+		i++;
+	}
+	return (i);
+}
+
+int		seek_flags(t_flags *lst2, const char *format, int  i)
+{
+	char *t;
+
+	while ((t = ft_strchr("#0-+ ", format[i])) != NULL)
+	{
+		lst2->diese = t[0] == '#';
+		lst2->zero = t[0] == '0';
+		lst2->minus = t[0] == '-';
+		lst2->plus = t[0] == '+';
+		lst2->space = t[0] == ' ';
+		i++;
+	}
+	return (i);
+}
+
+int	seek_types(int i, const char *format, va_list *argptr)
+{
+	t_printf *lst;
+	t_flags *lst2;
+	
+	i = seek_flags(lst2, format, i);
+	i = seek_field_precision(lst, format, i, argptr);
+	i = seek_len_modif_types(lst, format, i);
+	apply_flags(lst, lst2, argptr);
+	return (i);
 }

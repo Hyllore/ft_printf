@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/28 15:30:01 by droly            ###   ########.fr       */
+/*   Updated: 2016/01/29 16:01:55 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,80 +109,25 @@ int			ft_printf(const char *format, ...)
 	return (1);
 }*/
 
-int		seek_len_modif_types(t_printf *lst, const char *format, int i)
+void	apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 {
-	char *v;
-	int i2;
+	char	*str;
 
-	i = 0;
-	while ((v = strchr("hljz", format[i])) != NULL)
-	{
-		lst->len_modif[i2] = format[i];
-		i++;
-		i2++;
-	}
-	if ((v = strchr("sSpdDioOuUxXcC", format[i])) != NULL)
-	{
-		lst->type = format[i];
-		i++;
-	}
-	return (i);
-}
-
-int		seek_field_precision(t_printf *lst, const char *format, int i, va_list argptr)
-{
-	if (format[i] >= '0' && format[i] <= '9')
-		lst->field = ft_atoi((char*)&format[i]);
-	if (format[i] == '*')
-	{
-		lst->field = va_arg(argptr, int);
-		i++;
-	}
-	while (format[i] >= '0' && format[i] <= '9')
-		i++;
-	if (format[i] == '.' && format[i + 1] >= '0' && format[i + 1] <= '9')
-	{
-		i++;
-		lst->precision = ft_atoi((char*)&format[i]);
-	}
-	while (format[i] >= '0' && format[i] <= '9')
-		i++;
-	if (format[i] == '.' && format[i + 1] == '*')
-	{
-		lst->precision = va_arg(argptr, int);
-		i++;
-	}
-	return (i);
-}
-
-int		seek_flags(t_flags *lst2, const char *format, int  i)
-{
-	char *t;
-
-	while ((t = strchr("#0-+ ", format[i])) != NULL)
-	{
-		lst2->diese = t[0] == '#';
-		lst2->zero = t[0] == '0';
-		lst2->minus = t[0] == '-';
-		lst2->plus = t[0] == '+';
-		lst2->space = t[0] == ' ';
-		i++;
-	}
-	return (i);
-}
-
-int	seek_types(int i, const char *format, va_list argptr, ...)
-{
-	t_printf *lst;
-	t_flags *lst2;
-	
-	i = seek_flags(lst2, format, i);
-	i = seek_field_precision(lst, format, i, argptr);
-	i = seek_len_modif_types(lst, format, i);
-	apply_flags();
-	apply_field_precision();
-	apply_len_modif_types();
-	return (i);
+	str = NULL;
+	if (ft_strchr("dDioOuUxX", lst->type))
+		str = take_type1(lst, str, argptr);
+	if (ft_strchr("sSpcC", lst->type))
+		str = take_type2(lst, str, argptr);
+	if (lst2->diese == 1)
+		apply_diese(lst, lst2);
+	if (lst2->zero == 1)
+		apply_zero(lst, lst2);
+	if (lst2->minus == 1)
+		apply_minus(lst, lst2);
+	if (lst2->plus == 1)
+		apply_plus(lst, lst2);
+	if (lst2->space == 1)
+		apply_space(lst, lst2);
 }
 
 int			ft_printf(const char *format, ...)
