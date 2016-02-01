@@ -6,12 +6,12 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/01/29 16:01:55 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/01 16:26:27 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+//#include <stdio.h>
 /*
 int			count_percent(const char *str)
 {
@@ -114,20 +114,20 @@ void	apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 	char	*str;
 
 	str = NULL;
-	if (ft_strchr("dDioOuUxX", lst->type))
+	if ((ft_strchr("dDioOuUxX", lst->type)) != NULL)
 		str = take_type1(lst, str, argptr);
-	if (ft_strchr("sSpcC", lst->type))
+	if ((ft_strchr("sSpcC", lst->type)) != NULL)
 		str = take_type2(lst, str, argptr);
 	if (lst2->diese == 1)
-		apply_diese(lst, lst2);
+		apply_diese(lst, lst2, str);
 	if (lst2->zero == 1)
-		apply_zero(lst, lst2);
+		apply_zero(lst, lst2, str);
 	if (lst2->minus == 1)
-		apply_minus(lst, lst2);
+		apply_minus(lst, lst2, str);
 	if (lst2->plus == 1)
-		apply_plus(lst, lst2);
+		apply_plus(lst, lst2, str);
 	if (lst2->space == 1)
-		apply_space(lst, lst2);
+		apply_space(lst, lst2, str);
 }
 
 int			ft_printf(const char *format, ...)

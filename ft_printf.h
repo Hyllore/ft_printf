@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/01/29 16:01:59 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/01 11:36:29 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ typedef	struct		s_printf
 int	ft_printf(const char *format, ...);
 int	percent_int(const char *format, int i, int ret);
 int	percent_char_str_ptr(const char *format, int i, int ret);
-void	p_adress(va_list ap);
+char	*p_adress(va_list ap);
 
 #endif
