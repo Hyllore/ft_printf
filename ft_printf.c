@@ -6,12 +6,12 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/02 18:15:11 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/03 17:40:26 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//#include <stdio.h>
+#include <stdio.h>
 /*
 int			count_percent(const char *str)
 {
@@ -145,18 +145,20 @@ int			ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] == '%')
 		{
-			ft_putchar('p');
 			ft_putchar('%');
 			i += 2;
 		}
 		if (format[i] == '%')
 		{
-			ft_putchar('i');
 			i++;
 			seek_types(i, format, argptr);
+			i++;
 		}
-		ft_putchar(format[i]);
-		i++;
+		if (format[i] != '\0')
+		{
+			ft_putchar(format[i]);
+			i++;
+		}
 	}
 	return (/*nombre de caractere imprime*/0);
 }
@@ -166,6 +168,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	if (ft_printf("%p bonjour %d je m'appelle %c dorian %s", ptr, 42, 'f', "merci") == 0)
-		ft_putendl("error");
+	ft_printf("%p bonjour %i je m'appelle %C dorian %S %o %x %X %d", ptr, 42, 'f', "merci", 42, 123456789,123456789, 13);
+	printf("\n%p bonjour %i je m'appelle %C dorian %s %o %x %X %d", ptr, 42, 'f', "merci", 42, 123456789,123456789, 13);
 }
