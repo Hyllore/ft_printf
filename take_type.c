@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/03 17:40:28 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/04 17:36:29 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*take_type1(t_printf *lst, char *str, va_list argptr)
 	}
 	if ((ft_strchr("oO", lst->type)) != NULL)
 		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 8);
+	if ((ft_strchr("uU", lst->type)) != NULL)
+		str = ft_utoa(va_arg(argptr, unsigned int));
 	ft_putstr(str);
 	return (NULL);
 }

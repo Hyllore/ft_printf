@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/03 17:40:26 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/04 17:36:33 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%p bonjour %i je m'appelle %C dorian %S %o %x %X %d", ptr, 42, 'f', "merci", 42, 123456789,123456789, 13);
-	printf("\n%p bonjour %i je m'appelle %C dorian %s %o %x %X %d", ptr, 42, 'f', "merci", 42, 123456789,123456789, 13);
+	ft_printf("%p bonjour %i je m'appelle %C dorian %S %o %x %X %d %u", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
+	printf("\n%p bonjour %i je m'appelle %C dorian %s %o %x %X %d %u", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
 }

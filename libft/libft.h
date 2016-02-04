@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:09:59 by droly             #+#    #+#             */
-/*   Updated: 2016/02/03 16:33:01 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/04 16:37:44 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-char				*ft_itoa_base(int value, int base);
+char	*ft_itoa_base(int value, int base);
 void				ft_putnbr_u(unsigned n);
 char				*ft_itoa_u(unsigned int n);
 void				ft_putstr(char *str);
@@ -71,6 +71,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				*ft_itoa(int n);
+char				*ft_utoa(unsigned int n);
 char				**ft_strsplit(char const *s, char c);
 void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);

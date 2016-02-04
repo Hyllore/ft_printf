@@ -6,44 +6,43 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 16:31:16 by droly             #+#    #+#             */
-/*   Updated: 2016/02/03 16:40:18 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/04 17:36:35 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_pow(int nb, int pow)
+void	aux_dix(int n, char *ans, int *p)
 {
-	if (pow == 0)
-		return (1);
-	else
-		return (nb * ft_pow(nb, pow - 1));
+	if (n < -9 || 9 < n)
+		aux_dix(n / 10, ans, p);
+	ans[(*p)++] = '0' + ((n % 10) < 0 ? -(n % 10) : (n % 10));
+}
+
+void	aux(unsigned int n, unsigned int b, char *ans, int *p)
+{
+	char	base[] = "0123456789abcdef";
+
+	if (n >= b)
+		aux(n / b, b, ans, p);
+	ans[(*p)++] = base[n % b];
 }
 
 char	*ft_itoa_base(int value, int base)
 {
-	int		i;
-	char	*nbr;
-	int		neg;
+	char	*ans;
+	int	p;
 
-	i = 1;
-	neg = 0;
-	if (value < 0)
-	{
-		if (base == 10)
-			neg = 1;
-		value *= -1;
-	}
-	while (ft_pow(base, i) - 1 < value)
-		i++;
-	nbr = (char*)malloc(sizeof(nbr) * i);
-	nbr[i + neg] = '\0';
-	while (i-- > 0)
-	{
-		nbr[i + neg] = (value % base) + (value % base > 9 ? 'a' - 10 : '0');
-		value = value / base;
-	}
-	if (neg)
-		nbr[0] = '-';
-	return (nbr);
+	if (base < 2 || 16 < base
+			|| !(ans = (char *)malloc(sizeof(char) * 35)))
+		return (NULL);
+	p = 0;
+	if (base == 10 && value < 0)
+		ans[p++] = '-';
+	if (base == 10)
+		aux_dix(value, ans, &p);
+	else
+		aux((unsigned int)value, (unsigned int)base, ans, &p);
+	ans[p] = '\0';
+	return (ans);
 }
