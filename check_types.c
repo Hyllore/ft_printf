@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/04 17:36:31 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/05 12:35:33 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 {
-	int i2;
+	int			i2;
 
 	i2 = 0;
 	while ((ft_strchr("hljz", format[i])) != NULL)
@@ -31,7 +31,8 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 	return (*lst);
 }
 
-t_printf		seek_field_precision(t_printf *lst, const char *format, int i, va_list argptr)
+t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
+		va_list argptr)
 {
 	if (format[i] >= '0' && format[i] <= '9')
 		lst->field = ft_atoi((char*)&format[i]);
@@ -57,7 +58,7 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i, va_list
 	return (*lst);
 }
 
-t_flags		seek_flags(t_flags *lst2, const char *format, int  i, char *t)
+t_flags			seek_flags(t_flags *lst2, const char *format, int i, char *t)
 {
 	lst2->diese = t[0] == '#';
 	lst2->zero = t[0] == '0';
@@ -67,11 +68,11 @@ t_flags		seek_flags(t_flags *lst2, const char *format, int  i, char *t)
 	return (*lst2);
 }
 
-int	seek_types(int i, const char *format, va_list argptr)
+int				seek_types(int i, const char *format, va_list argptr)
 {
-	t_printf *lst;
-	t_flags *lst2;
-	char *t;
+	t_printf	*lst;
+	t_flags		*lst2;
+	char		*t;
 
 	lst2 = (t_flags*)malloc(sizeof(t_flags));
 	lst = (t_printf*)malloc(sizeof(t_printf));
@@ -84,7 +85,8 @@ int	seek_types(int i, const char *format, va_list argptr)
 	while ((format[i] >= '0' && format[i] <= '9') || format[i] == '*')
 		i++;
 	*lst = seek_len_modif_types(lst, format, i);
-	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[i])) != NULL)
+	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[i])) != NULL
+			&& format[i] != '\0')
 		i++;
 	apply_flags(lst, lst2, argptr);
 	return (i);

@@ -6,110 +6,14 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/04 17:36:33 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/05 14:23:00 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-/*
-int			count_percent(const char *str)
-{
-	int		i;
-	int		i2;
 
-	i2 = 0;
-	i = 0;
-	while (str[i2] != '\0')
-	{
-		if (str[i2] == '%' && str[i2 + 1] != '%' && str[i2 - 1] != '%' && 
-			str[i2 + 1] != '\0')
-		{
-			i++;
-		}
-		i2++;
-	}
-	return (i);
-}
-
-int			search_types(const char *format)
-{
-	int		ret;
-
-	if (format[0] == '%' && format[0 + 1] != '%')
-	{
-		ret = percent_int(format, 1, ret);
-		ret = percent_char_str_ptr(format, 1, ret);
-	}
-	return(ret);
-}
-
-void	apply_types(int ret, va_list *argptr)
-{
-	char c;
-	char *ptr;
-	int num;
-	void *ad;
-	unsigned int u;
-
-	num = 0;
-	if (ret == 6)
-	{
-		c = va_arg(*argptr, int);
-		ft_putchar(c);
-	}
-	if (ret == 7)
-	{
-		ptr = va_arg(*argptr, char*);
-		ft_putstr(ptr);
-	}
-	if (ret == 1)
-	{
-		num = va_arg(*argptr, int);
-		ft_putnbr(num);
-	}
-	if (ret == 8)
-	{
-		p_adress(*argptr);
-	}
-	if (ret == 2)
-	{
-		u = va_arg(*argptr, unsigned int);
-		ft_putnbr_u(u);
-//		ptr = ft_itoa_u(u);
-//		ft_putstr(ptr);
-	}
-}
-
-int			ft_printf(const char *format, ...)
-{
-	va_list	argptr;
-	int		i;
-	int		ret;
-	int i2 = 0;
-
-	ret = 0;
-	i = count_percent(format);
-	va_start(argptr, format);
-	while (i > 0)
-	{
-		while (format[i2] != '%' && format[i2] != '\0')
-		{
-			ft_putchar(format[i2]);
-			i2++;
-		}
-		ret = 0;
-		ret = search_types(&format[i2]);
-		if (ret == 0)
-			return (0);
-		apply_types(ret, &argptr);
-		i--;
-	}
-	va_end(argptr);
-	return (1);
-}*/
-
-void	apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
+void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 {
 	char	*str;
 
@@ -134,12 +38,8 @@ int			ft_printf(const char *format, ...)
 {
 	va_list	argptr;
 	int		i;
-	int		ret;
-	int i2;
 
 	i = 0;
-	i2 = 0;
-	ret = 0;
 	va_start(argptr, format);
 	while (format[i] != '\0')
 	{
@@ -148,11 +48,10 @@ int			ft_printf(const char *format, ...)
 			ft_putchar('%');
 			i += 2;
 		}
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1] != '%')
 		{
 			i++;
-			seek_types(i, format, argptr);
-			i++;
+			i = seek_types(i, format, argptr);
 		}
 		if (format[i] != '\0')
 		{
@@ -168,6 +67,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%p bonjour %i je m'appelle %C dorian %S %o %x %X %d %u", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
-	printf("\n%p bonjour %i je m'appelle %C dorian %s %o %x %X %d %u", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
+	ft_printf("%p bonjour %i je m'appelle %C dorian %S %o %x %X %d %u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
+	printf("\n%p bonjour %i je m'appelle %C dorian %s %o %x %X %d %u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
 }

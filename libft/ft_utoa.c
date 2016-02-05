@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:47:04 by droly             #+#    #+#             */
-/*   Updated: 2016/02/04 16:35:04 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/05 11:29:14 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_strlen_num(unsigned int num)
 {
-	int	i;
+	int		i;
 
 	if (num == 0)
 		return (1);
@@ -27,7 +27,7 @@ static int	ft_strlen_num(unsigned int num)
 	return (i);
 }
 
-static char			*ft_num_in_str(unsigned int n, char *str, int i)
+static char	*ft_num_in_str(unsigned int n, char *str, int i)
 {
 	while (i >= 0)
 	{
@@ -38,10 +38,10 @@ static char			*ft_num_in_str(unsigned int n, char *str, int i)
 	return (str);
 }
 
-char				*ft_utoa(unsigned int n)
+char		*ft_utoa(unsigned int n)
 {
-	char			*str;
-	int				i;
+	char	*str;
+	int		i;
 
 	i = ft_strlen_num(n);
 	if (!(str = (char *)malloc(sizeof(char) * (1 + i))))
