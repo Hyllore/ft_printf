@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/05 12:40:19 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/08 12:14:13 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ char	*take_type1(t_printf *lst, char *str, va_list argptr)
 		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 8);
 	if ((ft_strchr("uU", lst->type)) != NULL)
 		str = ft_utoa(va_arg(argptr, unsigned int));
-	ft_putstr(str);
-	return (NULL);
+	return (str);
 }
 
 char	*take_type2(t_printf *lst, char *str, va_list argptr)
@@ -71,6 +70,5 @@ char	*take_type2(t_printf *lst, char *str, va_list argptr)
 			tmp = "0x100";
 		str = ft_strjoin(tmp, str);
 	}
-	ft_putstr(str);
-	return (NULL);
+	return (str);
 }

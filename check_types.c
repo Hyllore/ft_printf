@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/05 12:35:33 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/08 17:56:38 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 		va_list argptr)
 {
+	lst->field = -1;
 	if (format[i] >= '0' && format[i] <= '9')
 		lst->field = ft_atoi((char*)&format[i]);
 	if (format[i] == '*')
@@ -79,6 +80,11 @@ int				seek_types(int i, const char *format, va_list argptr)
 	while ((t = ft_strchr("#0-+ ", format[i])) != NULL)
 	{
 		*lst2 = seek_flags(lst2, format, i, t);
+		i++;
+	}
+	if (format[i] == '0')
+	{
+		lst2->zero = 1;
 		i++;
 	}
 	*lst = seek_field_precision(lst, format, i, argptr);
