@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/08 17:56:38 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/09 17:58:19 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 t_flags			seek_flags(t_flags *lst2, const char *format, int i, char *t)
 {
 	lst2->diese = t[0] == '#';
-	lst2->zero = t[0] == '0';
 	lst2->minus = t[0] == '-';
 	lst2->plus = t[0] == '+';
 	lst2->space = t[0] == ' ';
@@ -77,7 +76,7 @@ int				seek_types(int i, const char *format, va_list argptr)
 
 	lst2 = (t_flags*)malloc(sizeof(t_flags));
 	lst = (t_printf*)malloc(sizeof(t_printf));
-	while ((t = ft_strchr("#0-+ ", format[i])) != NULL)
+	while ((t = ft_strchr("#-+ ", format[i])) != NULL)
 	{
 		*lst2 = seek_flags(lst2, format, i, t);
 		i++;
@@ -88,7 +87,7 @@ int				seek_types(int i, const char *format, va_list argptr)
 		i++;
 	}
 	*lst = seek_field_precision(lst, format, i, argptr);
-	while ((format[i] >= '0' && format[i] <= '9') || format[i] == '*')
+	while ((format[i] >= '0' && format[i] <= '9') || format[i] == '*' || format[i] == '.')
 		i++;
 	*lst = seek_len_modif_types(lst, format, i);
 	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[i])) != NULL
