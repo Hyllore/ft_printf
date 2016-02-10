@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/09 17:58:14 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/10 17:41:41 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 
 	str = NULL;
 	if ((ft_strchr("dDioOuUxX", lst->type)) != NULL)
-		str = take_type1(lst, str, argptr);
+		str = take_type1(lst, lst2, str, argptr);
 	if ((ft_strchr("sSpcC", lst->type)) != NULL)
 		str = take_type2(lst, str, argptr);
-	if (lst->field != -1)
-		str = apply_field(lst, lst2, str);
+	if (lst->field != -1 && lst2->zero == 1)
+		str = apply_field_zero(lst, lst2, str, ft_strlen(str));
 	if (lst2->diese == 1)
 		 str = apply_diese(lst, lst2, str);
 //	if (lst2->zero == 1)
@@ -36,6 +36,8 @@ void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 //	ft_putchar(' ');
 //	ft_putnbr(lst->precision);
 //	ft_putchar(' ');
+	if (lst->field != -1 && lst2->zero == 0)
+		str = apply_field_space(lst, lst2, str);
 	if (lst2->space == 1)
 		str = apply_space(lst, lst2, str);
 	ft_putstr(str);
@@ -72,6 +74,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%p bonjour %i je m'appelle %C dorian %s %#o %#x %#X %+012d %u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, -1234567, 1234567);
-	printf("\n%p bonjour %i je m'appelle %C dorian %s %#o %#x %#X %+012d %u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, -1234567, 1234567);
+	ft_printf("%12p bonjour %012i je m'appelle %12C dorian %12s %08o %012x %012X % 012d %012u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
+	printf("\n%12p bonjour %012i je m'appelle %12C dorian %12s %08o %012x %012X % 012d %012u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
 }
