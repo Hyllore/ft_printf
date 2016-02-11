@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/10 17:41:39 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/11 16:29:00 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char			*apply_space(t_printf *lst, t_flags *lst2, char *str);
 char			*apply_plus(t_printf *lst, t_flags *lst2, char *str);
 char			*apply_field_zero(t_printf *lst, t_flags *lst2, char *str,
 		int i);
-char			*apply_field_space(t_printf *lst, t_flags *lst2, char *str);
+char			*apply_field_space(t_printf *lst, t_flags *lst2, char *str,
+		int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/10 17:41:41 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/11 16:29:07 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,10 @@ void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 		str = apply_field_zero(lst, lst2, str, ft_strlen(str));
 	if (lst2->diese == 1)
 		 str = apply_diese(lst, lst2, str);
-//	if (lst2->zero == 1)
-//		apply_zero(lst, lst2, str);
-//	if (lst2->minus == 1)
-//		apply_minus(lst, lst2, str);
 	if (lst2->plus == 1)
 		str = apply_plus(lst, lst2, str);
-//	ft_putnbr(lst->field);
-//	ft_putchar(' ');
-//	ft_putnbr(lst->precision);
-//	ft_putchar(' ');
-	if (lst->field != -1 && lst2->zero == 0)
-		str = apply_field_space(lst, lst2, str);
+	if (lst->field != -1 && lst2->zero != 1)
+		str = apply_field_space(lst, lst2, str, ft_strlen(str));
 	if (lst2->space == 1)
 		str = apply_space(lst, lst2, str);
 	ft_putstr(str);
@@ -74,6 +66,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%12p bonjour %012i je m'appelle %12C dorian %12s %08o %012x %012X % 012d %012u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
-	printf("\n%12p bonjour %012i je m'appelle %12C dorian %12s %08o %012x %012X % 012d %012u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, 1234567, 1234567, 1234567, 1234567);
+	ft_printf("%12p bonjour %0+*i je m'appelle %12C dorian %-12s %08o %012x %012X % 012d %012u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
+	printf("\n%12p bonjour %+*.42i je m'appelle %12C dorian %-12.100s %08o %012x %012X % 012d %012u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
 }

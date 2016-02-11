@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/10 15:56:02 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/11 16:29:03 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,13 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 t_flags			seek_flags(t_flags *lst2, const char *format, int i, char *t)
 {
 	lst2->diese = t[0] == '#';
-	lst2->minus = t[0] == '-';
-	lst2->plus = t[0] == '+';
+	if (t[0] == '-')
+		lst2->minus = 1;
+	if (t[0] == '+')
+		lst2->plus = 1;
 	lst2->space = t[0] == ' ';
+	if (t[0] == '0')
+		lst2->zero = 1;
 	return (*lst2);
 }
 
@@ -76,14 +80,10 @@ int				seek_types(int i, const char *format, va_list argptr)
 
 	lst2 = (t_flags*)malloc(sizeof(t_flags));
 	lst = (t_printf*)malloc(sizeof(t_printf));
-	while ((t = ft_strchr("#-+ ", format[i])) != NULL)
+	t = (char*)malloc(sizeof(char) * 2);
+	while ((t = ft_strchr("#-+ 0", format[i])) != NULL)
 	{
 		*lst2 = seek_flags(lst2, format, i, t);
-		i++;
-	}
-	if (format[i] == '0')
-	{
-		lst2->zero = 1;
 		i++;
 	}
 	*lst = seek_field_precision(lst, format, i, argptr);
