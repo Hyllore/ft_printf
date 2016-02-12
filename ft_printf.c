@@ -28,6 +28,8 @@ void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 		 str = apply_diese(lst, lst2, str);
 	if (lst2->plus == 1)
 		str = apply_plus(lst, lst2, str);
+	if (lst->precision != -1)
+		str = apply_precision(lst, lst2, str);
 	if (lst->field != -1 && lst2->zero != 1)
 		str = apply_field_space(lst, lst2, str, ft_strlen(str));
 	if (lst2->space == 1)
@@ -66,6 +68,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%12p bonjour %0+*i je m'appelle %12C dorian %-12s %08o %012x %012X % 012d %012u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
-	printf("\n%12p bonjour %+*.42i je m'appelle %12C dorian %-12.100s %08o %012x %012X % 012d %012u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
+	ft_printf("%12p bonjour %-+*i je m'appelle %12C dorian %12.4s %08o %#012x %#012X % 012d %012u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
+	printf("\n%12p bonjour %-+*.3i je m'appelle %12C dorian %12.4s %8.3o %#12.3x %#12.3X % 12.3d %12.3u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
 }

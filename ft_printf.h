@@ -49,5 +49,6 @@ char			*apply_field_zero(t_printf *lst, t_flags *lst2, char *str,
 		int i);
 char			*apply_field_space(t_printf *lst, t_flags *lst2, char *str,
 		int i);
+char			*apply_precision(t_printf *lst, t_flags *lst2, char *str);
 
 #endif

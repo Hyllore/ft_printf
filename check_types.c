@@ -35,6 +35,7 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 		va_list argptr)
 {
 	lst->field = -1;
+	lst->precision = -1;
 	if (format[i] >= '0' && format[i] <= '9')
 		lst->field = ft_atoi((char*)&format[i]);
 	if (format[i] == '*')
@@ -61,12 +62,14 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 
 t_flags			seek_flags(t_flags *lst2, const char *format, int i, char *t)
 {
-	lst2->diese = t[0] == '#';
+	if (t[0] == '#')
+		lst2->diese = 1;
 	if (t[0] == '-')
 		lst2->minus = 1;
 	if (t[0] == '+')
 		lst2->plus = 1;
-	lst2->space = t[0] == ' ';
+	if (t[0] == ' ')
+		lst2->space = 1;
 	if (t[0] == '0')
 		lst2->zero = 1;
 	return (*lst2);
