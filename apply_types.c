@@ -6,13 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 12:37:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/11 16:29:05 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/15 18:23:54 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*apply_diese(t_printf *lst, t_flags *lst2, char *str)
+char	*apply_diese(t_printf *lst, char *str)
 {
 	if (lst->type == 'o' || lst->type == 'O')
 		str = ft_strjoin("0", str);
@@ -23,14 +23,14 @@ char	*apply_diese(t_printf *lst, t_flags *lst2, char *str)
 	return (str);
 }
 
-char	*apply_plus(t_printf *lst, t_flags *lst2, char *str)
+char	*apply_plus(char *str)
 {
 	if (ft_atoi(str) >= 0)
 		str = ft_strjoin("+", str);
 	return (str);
 }
 
-char	*apply_space(t_printf *lst, t_flags *lst2, char *str)
+char	*apply_space(char *str)
 {
 	if (ft_atoi(str) >= 0)
 		str = ft_strjoin(" ", str);

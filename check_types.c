@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/11 16:29:03 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/15 18:38:20 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 	return (*lst);
 }
 
-t_flags			seek_flags(t_flags *lst2, const char *format, int i, char *t)
+t_flags			seek_flags(t_flags *lst2, char *t)
 {
 	if (t[0] == '#')
 		lst2->diese = 1;
@@ -86,11 +86,12 @@ int				seek_types(int i, const char *format, va_list argptr)
 	t = (char*)malloc(sizeof(char) * 2);
 	while ((t = ft_strchr("#-+ 0", format[i])) != NULL)
 	{
-		*lst2 = seek_flags(lst2, format, i, t);
+		*lst2 = seek_flags(lst2, t);
 		i++;
 	}
 	*lst = seek_field_precision(lst, format, i, argptr);
-	while ((format[i] >= '0' && format[i] <= '9') || format[i] == '*' || format[i] == '.')
+	while ((format[i] >= '0' && format[i] <= '9')
+			|| format[i] == '*' || format[i] == '.')
 		i++;
 	*lst = seek_len_modif_types(lst, format, i);
 	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[i])) != NULL

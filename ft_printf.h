@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/11 16:29:00 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/15 18:38:26 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,22 @@ int				ft_printf(const char *format, ...);
 t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i);
 t_printf		seek_field_precision(t_printf *lst, const char *format,
 		int i, va_list argptr);
-t_flags			seek_flags(t_flags *lst2, const char *format, int i, char *lst);
+t_flags			seek_flags(t_flags *lst2, char *t);
 int				seek_types(int i, const char *format, va_list argptr);
 void			apply_flags(t_printf *lst, t_flags *lst2, va_list argptr);
 char			*put_in_maj(char *str);
-char			*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr);
+char			*take_type1(t_printf *lst, t_flags *lst2, char *str,
+		va_list argptr);
 char			*take_type2(t_printf *lst, char *str, va_list argptr);
-char			*apply_diese(t_printf *lst, t_flags *lst2, char *str);
-char			*apply_space(t_printf *lst, t_flags *lst2, char *str);
-char			*apply_plus(t_printf *lst, t_flags *lst2, char *str);
+char			*apply_diese(t_printf *lst, char *str);
+char			*apply_space(char *str);
+char			*apply_plus(char *str);
 char			*apply_field_zero(t_printf *lst, t_flags *lst2, char *str,
 		int i);
 char			*apply_field_space(t_printf *lst, t_flags *lst2, char *str,
 		int i);
-char			*apply_precision(t_printf *lst, t_flags *lst2, char *str);
+char			*apply_precision_str(t_printf *lst, char *str);
+char			*apply_precision_num(t_printf *lst, char *str,
+		int i);
 
 #endif

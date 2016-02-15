@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/11 16:29:07 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/15 18:38:24 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
 		str = take_type2(lst, str, argptr);
 	if (lst->field != -1 && lst2->zero == 1)
 		str = apply_field_zero(lst, lst2, str, ft_strlen(str));
+	if (lst->precision != -1 && (ft_strchr("dDioOuUxX", lst->type)) != NULL)
+		str = apply_precision_num(lst, str, ft_strlen(str));
 	if (lst2->diese == 1)
-		 str = apply_diese(lst, lst2, str);
+		str = apply_diese(lst, str);
 	if (lst2->plus == 1)
-		str = apply_plus(lst, lst2, str);
-	if (lst->precision != -1)
-		str = apply_precision(lst, lst2, str);
+		str = apply_plus(str);
+	if (lst->precision != -1 && (ft_strchr("sS", lst->type)) != NULL)
+		str = apply_precision_str(lst, str);
 	if (lst->field != -1 && lst2->zero != 1)
 		str = apply_field_space(lst, lst2, str, ft_strlen(str));
 	if (lst2->space == 1)
-		str = apply_space(lst, lst2, str);
+		str = apply_space(str);
 	ft_putstr(str);
 }
 
@@ -68,6 +70,6 @@ int			main(void)
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%12p bonjour %-+*i je m'appelle %12C dorian %12.4s %08o %#012x %#012X % 012d %012u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
-	printf("\n%12p bonjour %-+*.3i je m'appelle %12C dorian %12.4s %8.3o %#12.3x %#12.3X % 12.3d %12.3u %%%%%%", ptr, 12, 1234567, 'f', "merci", 1234567, -1, 1234567, 1234567, 1234567);
+	ft_printf("%12p bonjour %d je m'appelle %12C dorian %12.3s %#18.19o %#12.20x %-12.20X %+12.20d %12.20u %%%%%%", ptr, 1234567, 'f', "merci", 1234567, -1, 1234567, -1234567, 1234567);
+	printf("\n%12p bonjour %+20.20jd je m'appelle %12C dorian %12.3s %#18.19o %#12.20x %-12.20X %+12.20d %12.20u %%%%%%", ptr, (intmax_t)4, 'f', "merci", 1234567, -1, 1234567, -1234567, 1234567);
 }

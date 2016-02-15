@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/11 15:54:14 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/15 18:23:37 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr)
 		str = ft_itoa(va_arg(argptr, int));
 	if ((ft_strchr("x", lst->type)) != NULL)
 		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 16);
-		if (lst2->diese == 1 && ft_strchr("xX", lst->type) != NULL)
-			lst->field -= 2;
+	if (lst2->diese == 1 && ft_strchr("xX", lst->type) != NULL)
+		lst->field -= 2;
 	if ((ft_strchr("X", lst->type)) != NULL)
 	{
 		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 16);
