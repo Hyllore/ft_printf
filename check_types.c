@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/15 18:38:20 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 14:11:44 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 	int			i2;
 
 	i2 = 0;
+	lst->len_modif = malloc(sizeof(char) * 2);
 	while ((ft_strchr("hljz", format[i])) != NULL)
 	{
 		lst->len_modif[i2] = format[i];
 		i++;
 		i2++;
 	}
+	lst->len_modif[i2] = '\0';
 	if ((ft_strchr("sSpdDioOuUxXcC", format[i])) != NULL)
 	{
 		lst->type = format[i];

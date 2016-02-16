@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/15 18:38:22 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 14:12:01 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,42 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 		if (c[0] != 0)
 			str = ft_strjoin(c, str);
 	}
+	return (str);
+}
+
+char		*len_modif_d_i(t_printf *lst, char *str)
+{
+	long long i;
+
+	i = 0;
+	i = (long long)ft_atoi(str);
+	if ((ft_strchr("h", lst->len_modif[0]) != NULL) &&
+			(ft_strchr("h", lst->len_modif[1]) != NULL))
+		str = ft_utoa((char)i);
+	else if (ft_strchr("h", lst->len_modif[0]) != NULL)
+		str = ft_utoa((short)i);
+	else if (ft_strchr("l", lst->len_modif[0]) != NULL)
+		str = ft_utoa((long)i);
+	else if ((ft_strchr("l", lst->len_modif[0]) != NULL) &&
+			(ft_strchr("l", lst->len_modif[1]) != NULL))
+		str = ft_utoa((long long)i);
+	else if (ft_strchr("j", lst->len_modif[0]) != NULL)
+		str = ft_utoa((intmax_t)i);
+	else if (ft_strchr("z", lst->len_modif[0]) != NULL)
+		str = ft_utoa(i);
+	return (str);
+}
+
+char		*len_modif_o_u(t_printf *lst, char *str)
+{
+
+}
+
+char		*apply_len_modif(t_printf *lst, char *str)
+{
+	if (ft_strchr("dDi", lst->type) != NULL)
+		str = len_modif_d_i(lst, str);
+	if (ft_strchr("oOuUxX", lst->type) != NULL)
+		str = len_modif_o_u(lst, str);
 	return (str);
 }
