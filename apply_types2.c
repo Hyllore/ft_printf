@@ -6,12 +6,12 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/16 14:12:01 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 17:30:15 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <stdio.h>
 char		*apply_precision_str(t_printf *lst, char *str)
 {
 	int		i;
@@ -67,39 +67,66 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 	return (str);
 }
 
-char		*len_modif_d_i(t_printf *lst, char *str)
+char		*len_modif_d_i(t_printf *lst, char *str, va_list argptr)
 {
 	long long i;
+	int i2;
 
+	i2 = 0;
 	i = 0;
-	i = (long long)ft_atoi(str);
-	if ((ft_strchr("h", lst->len_modif[0]) != NULL) &&
-			(ft_strchr("h", lst->len_modif[1]) != NULL))
-		str = ft_utoa((char)i);
+//	i = ft_atoi(str);
+	ft_putchar('e');
+//	printf("%d" , (int)i);
+//	if (i < 0)
+//	{
+//		i2 = 1;
+//		i = i * -1;
+//	}
+	if (lst->len_modif[0] == 'h' && lst->len_modif[1] == 'h')
+	{
+		ft_putchar('a');
+		str = ft_utoa(va_arg(argptr, int));
+	}
 	else if (ft_strchr("h", lst->len_modif[0]) != NULL)
-		str = ft_utoa((short)i);
+	{
+		ft_putchar('b');
+		str = ft_utoa((short)va_arg(argptr, int));
+	}
+	else if (lst->len_modif[0] == 'l' && lst->len_modif[1] == 'l')
+	{
+		ft_putchar('c');
+		str = ft_utoa(va_arg(argptr, long long));
+	}
 	else if (ft_strchr("l", lst->len_modif[0]) != NULL)
-		str = ft_utoa((long)i);
-	else if ((ft_strchr("l", lst->len_modif[0]) != NULL) &&
-			(ft_strchr("l", lst->len_modif[1]) != NULL))
-		str = ft_utoa((long long)i);
+	{
+		ft_putchar('d');
+		str = ft_utoa(va_arg(argptr, long));
+	}
 	else if (ft_strchr("j", lst->len_modif[0]) != NULL)
-		str = ft_utoa((intmax_t)i);
+	{
+		ft_putchar('e');
+		str = ft_utoa(va_arg(argptr, intmax_t));
+	}
 	else if (ft_strchr("z", lst->len_modif[0]) != NULL)
-		str = ft_utoa(i);
+	{
+		ft_putchar('f');
+		str = ft_utoa(va_arg(argptr, int));
+	}
+	if (i2 == 1)
+		str = ft_strjoin("-", str);
 	return (str);
 }
 
-char		*len_modif_o_u(t_printf *lst, char *str)
+char		*len_modif_o_u(t_printf *lst, char *str, va_list argptr)
 {
 
 }
 
-char		*apply_len_modif(t_printf *lst, char *str)
+char		*apply_len_modif(t_printf *lst, char *str, va_list argptr)
 {
 	if (ft_strchr("dDi", lst->type) != NULL)
-		str = len_modif_d_i(lst, str);
+		str = len_modif_d_i(lst, str, argptr);
 	if (ft_strchr("oOuUxX", lst->type) != NULL)
-		str = len_modif_o_u(lst, str);
+		str = len_modif_o_u(lst, str, argptr);
 	return (str);
 }

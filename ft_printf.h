@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/16 13:57:39 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 17:30:18 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char			*apply_field_space(t_printf *lst, t_flags *lst2, char *str,
 char			*apply_precision_str(t_printf *lst, char *str);
 char			*apply_precision_num(t_printf *lst, char *str,
 		int i);
-char			*apply_len_modif(t_printf *lst, char *str);
-char			*len_modif_d_i(t_printf *lst, char *str);
-char			*len_modif_o_u(t_printf *lst, char *str);
+char			*apply_len_modif(t_printf *lst, char *str, va_list argptr);
+char			*len_modif_d_i(t_printf *lst, char *str, va_list argptr);
+char			*len_modif_o_u(t_printf *lst, char *str, va_list argptr);
 
 
 #endif

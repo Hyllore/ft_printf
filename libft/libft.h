@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:09:59 by droly             #+#    #+#             */
-/*   Updated: 2016/02/15 18:33:43 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 17:21:24 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void				*ft_memmove(void *dest, const void *src, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_strncat(char *s1, const char *s2, size_t n);
-int					ft_atoi(const char *str);
+long long			ft_atoi(const char *str);
 size_t				ft_strlcat(char *dst, const char *src, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
@@ -71,7 +71,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s);
 char				*ft_itoa(int n);
-char				*ft_utoa(unsigned int n);
+char				*ft_utoa(unsigned long long n);
 char				**ft_strsplit(char const *s, char c);
 void				ft_putendl(char const *s);
 void				ft_putchar_fd(char c, int fd);

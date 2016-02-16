@@ -6,13 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:47:04 by droly             #+#    #+#             */
-/*   Updated: 2016/02/05 11:29:14 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 17:21:34 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_strlen_num(unsigned int num)
+static int	ft_strlen_num(unsigned long long num)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ static int	ft_strlen_num(unsigned int num)
 	return (i);
 }
 
-static char	*ft_num_in_str(unsigned int n, char *str, int i)
+static char	*ft_num_in_str(unsigned long long n, char *str, int i)
 {
 	while (i >= 0)
 	{
@@ -38,7 +38,7 @@ static char	*ft_num_in_str(unsigned int n, char *str, int i)
 	return (str);
 }
 
-char		*ft_utoa(unsigned int n)
+char		*ft_utoa(unsigned long long n)
 {
 	char	*str;
 	int		i;

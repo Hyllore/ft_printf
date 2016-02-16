@@ -6,13 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 18:14:37 by droly             #+#    #+#             */
-/*   Updated: 2015/12/05 14:40:51 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/16 16:34:19 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_add(int i, char *str1, int dst)
+static long long	ft_add(int i, char *str1, long long dst)
 {
 	while (str1[i] != '\0' && str1[i] >= '0' && str1[i] <= '9')
 	{
@@ -22,12 +22,12 @@ static int	ft_add(int i, char *str1, int dst)
 	return (dst);
 }
 
-int			ft_atoi(const char *str)
+long long			ft_atoi(const char *str)
 {
-	int		i;
-	int		dst;
-	char	*str1;
-	int		neg;
+	int				i;
+	long long		dst;
+	char			*str1;
+	int				neg;
 
 	neg = 0;
 	dst = 0;
