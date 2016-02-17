@@ -6,7 +6,7 @@
 #    By: droly <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/15 18:14:32 by droly             #+#    #+#              #
-#    Updated: 2016/02/17 13:55:58 by droly            ###   ########.fr        #
+#    Updated: 2016/02/17 17:26:40 by droly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ SRC = apply_types.c		\
 	  check_types.c		\
 	  ft_printf.c		\
 	  take_type.c		\
+	  len_modif.c		\
+	  len_modif_d_i.c	\
+	  len_modif_o_u.c
+
 
 SRCLIBFT = ft_memset.c		\
 		   ft_bzero.c		\

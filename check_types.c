@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/16 15:40:24 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/17 16:11:59 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ int				seek_types(int i, const char *format, va_list argptr)
 	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[i])) != NULL
 			&& format[i] != '\0')
 		i++;
-	apply_flags(lst, lst2, argptr);
+	apply_flags(lst, lst2, argptr, NULL);
 	return (i);
 }

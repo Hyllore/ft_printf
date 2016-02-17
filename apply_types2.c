@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/17 14:17:51 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/17 17:00:09 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,12 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 	return (str);
 }
 
-char		*apply_len_modif(t_printf *lst, char *str, va_list argptr)
+char		*apply_len_modif(t_printf *lst, char *str, va_list argptr,
+		t_flags *lst2)
 {
 	if (ft_strchr("dDi", lst->type) != NULL)
 		str = len_modif_d_i(lst, str, argptr);
-//	if (ft_strchr("oOuUxX", lst->type) != NULL)
-//		str = len_modif_o_u(lst, str, argptr);
+	if (ft_strchr("oOuUxX", lst->type) != NULL)
+		str = len_modif_o_u(lst, str, argptr, lst2);
 	return (str);
 }

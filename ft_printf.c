@@ -6,74 +6,38 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/17 13:21:10 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/17 17:36:50 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr)
+void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr, char *str)
 {
-	char	*str;
-
-	str = NULL;
-	if ((ft_strchr("dDioOuUxX", lst->type)) != NULL && lst->len_modif == NULL)
-	{
+	if ((ft_strchr("dDioOuUxX", lst->type)) != NULL && (lst->len_modif[0] != 'h'
+				&& lst->len_modif[0] != 'l' && lst->len_modif[0] != 'j' &&
+				lst->len_modif[0] != 'z'))
 		str = take_type1(lst, lst2, str, argptr);
-//		ft_putchar('1');
-	}
-	if ((ft_strchr("oOuUxX", lst->type)) != NULL)
-	{
-		str = take_type1(lst, lst2, str, argptr);
-//		ft_putchar('1');
-	}
 	if ((ft_strchr("sSpcC", lst->type)) != NULL)
-	{
 		str = take_type2(lst, str, argptr);
-//		ft_putchar('2');
-	}
-//	ft_putstr(str);
-	if (lst->len_modif[0] == 'h' || lst->len_modif[0] == 'l' || lst->len_modif[0] == 'j' || lst->len_modif[0] == 'z')
-	{
-		str = apply_len_modif(lst, str, argptr);
-//		ft_putchar('3');
-	}
+	if (lst->len_modif[0] == 'h' || lst->len_modif[0] == 'l' ||
+			lst->len_modif[0] == 'j' || lst->len_modif[0] == 'z')
+		str = apply_len_modif(lst, str, argptr, lst2);
 	if (lst->field != -1 && lst2->zero == 1)
-	{
 		str = apply_field_zero(lst, lst2, str, ft_strlen(str));
-//		ft_putchar('4');
-	}
 	if (lst->precision != -1 && (ft_strchr("dDioOuUxX", lst->type)) != NULL)
-	{
 		str = apply_precision_num(lst, str, ft_strlen(str));
-//		ft_putchar('5');
-	}
 	if (lst2->diese == 1)
-	{
 		str = apply_diese(lst, str);
-//		ft_putchar('6');
-	}
 	if (lst2->plus == 1)
-	{
 		str = apply_plus(str);
-//		ft_putchar('7');
-	}
 	if (lst->precision != -1 && (ft_strchr("sS", lst->type)) != NULL)
-	{
 		str = apply_precision_str(lst, str);
-//		ft_putchar('8');
-	}
 	if (lst->field != -1 && lst2->zero != 1)
-	{
 		str = apply_field_space(lst, lst2, str, ft_strlen(str));
-//		ft_putchar('9');
-	}
 	if (lst2->space == 1)
-	{
 		str = apply_space(str);
-//		ft_putchar('0');
-	}
 	ft_putstr(str);
 }
 
@@ -100,14 +64,16 @@ int			ft_printf(const char *format, ...)
 			ft_putchar(format[i]);
 		i++;
 	}
-	return (/*nombre de caractere imprime*/0);
+	return (/*nombre de caractere imprime*/1);
 }
 
-int			main(void)
+/*int			main(void)
 {
 	char *ptr;
 
 	ptr = "hey";
-	ft_printf("%12p bonjour %+19.19lld je m'appelle %12C dorian %12.3s %#18.19o %#12.20x %-12.20X %+12.20hd %+12.20hd %12.20u %%%%%%", ptr, (long long)-9223372036854775807, 'f', "merci", 1234567, -1, 1234567, (short)-922337203685477580,(short)42, 1234567);
-	printf("\n%12p bonjour %+19.19lld je m'appelle %12C dorian %12.3s %#18.19o %#12.20x %-12.20X %+12.20hd %+12.20hd %12.20u %%%%%%", ptr, (long long)-9223372036854775807, 'f', "merci", 1234567, -1, 1234567, (short)-922337203685477580,(short)42, 1234567);
+	ft_printf("\n");
 }
+	ft_printf("d %+19.19d o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%", 42, 1234567, -1, (unsigned long)4294967296, (short)-922337203685477580,(short)42, 1234567);
+	printf("\nd %+19.19d o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%", 42, 1234567, -1, (unsigned long)4294967296, (short)-922337203685477580,(short)42, 1234567);
+}*/
