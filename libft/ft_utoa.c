@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:47:04 by droly             #+#    #+#             */
-/*   Updated: 2016/02/16 17:21:34 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/17 13:35:49 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_strlen_num(unsigned long long num)
 	return (i);
 }
 
-static char	*ft_num_in_str(unsigned long long n, char *str, int i)
+static char	*ft_num_in_str(unsigned long long n, char *str, int i, int i2)
 {
 	while (i >= 0)
 	{
@@ -35,6 +35,8 @@ static char	*ft_num_in_str(unsigned long long n, char *str, int i)
 		n /= 10;
 		i--;
 	}
+	if (i2 == 1)
+		ft_strjoin("-", str);
 	return (str);
 }
 
@@ -42,10 +44,12 @@ char		*ft_utoa(unsigned long long n)
 {
 	char	*str;
 	int		i;
+	int		i2;
 
+	i2 = 0;
 	i = ft_strlen_num(n);
 	if (!(str = (char *)malloc(sizeof(char) * (1 + i))))
 		return (NULL);
 	str[i] = '\0';
-	return (ft_num_in_str(n, str, i - 1));
+	return (ft_num_in_str(n, str, i - 1, i2));
 }

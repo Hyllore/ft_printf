@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/16 17:30:18 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/17 14:38:30 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ char			*apply_precision_num(t_printf *lst, char *str,
 char			*apply_len_modif(t_printf *lst, char *str, va_list argptr);
 char			*len_modif_d_i(t_printf *lst, char *str, va_list argptr);
 char			*len_modif_o_u(t_printf *lst, char *str, va_list argptr);
+char			*len_modif_l_z(t_printf *lst, char *str, va_list argptr,
+		long long i);
+char			*len_modif_h_j(t_printf *lst, char *str, va_list argptr,
+		long long i);
 
 
 #endif
