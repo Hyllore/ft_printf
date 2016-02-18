@@ -6,20 +6,20 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/02/17 15:55:51 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/18 14:22:59 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static long long	plus(long long i)
+long long	plus(long long i)
 {
 	if (i < 0)
 		i = i * -1;
 	return (i);
 }
 
-static char	*db(long long i, char *str)
+char		*db(long long i, char *str)
 {
 	int i2;
 
@@ -33,7 +33,8 @@ static char	*db(long long i, char *str)
 	return (str);
 }
 
-char	*len_modif_h_j(t_printf *lst, char *str, va_list argptr, long long i)
+char		*len_modif_h_j(t_printf *lst, char *str, va_list argptr,
+		long long i)
 {
 	if (lst->len_modif[0] == 'h' && lst->len_modif[1] == 'h')
 	{
@@ -53,7 +54,8 @@ char	*len_modif_h_j(t_printf *lst, char *str, va_list argptr, long long i)
 	return (str);
 }
 
-char	*len_modif_l_z(t_printf *lst, char *str, va_list argptr, long long i)
+char		*len_modif_l_z(t_printf *lst, char *str, va_list argptr,
+		long long i)
 {
 	if (lst->len_modif[0] == 'l' && lst->len_modif[1] == 'l')
 	{

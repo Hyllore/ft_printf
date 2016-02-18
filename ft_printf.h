@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/17 17:36:54 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/18 14:22:54 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct	s_printf
 	int			precision;
 	char		*len_modif;
 	char		type;
+	int			i;
+	int			i2;
 }				t_printf;
 
 int				ft_printf(const char *format, ...);
@@ -37,8 +39,8 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i);
 t_printf		seek_field_precision(t_printf *lst, const char *format,
 		int i, va_list argptr);
 t_flags			seek_flags(t_flags *lst2, char *t);
-int				seek_types(int i, const char *format, va_list argptr);
-void			apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
+t_printf		seek_types(t_printf *lst, const char *format, va_list argptr);
+t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 		char *str);
 char			*put_in_maj(char *str);
 char			*take_type1(t_printf *lst, t_flags *lst2, char *str,
@@ -67,6 +69,10 @@ char			*len_modif_l_z2(t_printf *lst, char *str, va_list argptr,
 		long long i);
 char			*len_modif_h_j2(t_printf *lst, char *str, va_list argptr,
 		long long i);
-
+t_printf		write_char(t_printf *lst, char *str, int i);
+t_printf		ft_printf_bis(const char *format, va_list argptr,
+		t_printf *lst);
+char			*db(long long i, char *str);
+long long		plus(long long i);
 
 #endif

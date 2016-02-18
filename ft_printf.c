@@ -6,14 +6,15 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/17 17:36:50 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/18 14:31:25 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr, char *str)
+t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
+		char *str)
 {
 	if ((ft_strchr("dDioOuUxX", lst->type)) != NULL && (lst->len_modif[0] != 'h'
 				&& lst->len_modif[0] != 'l' && lst->len_modif[0] != 'j' &&
@@ -38,42 +39,54 @@ void		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr, char *str)
 		str = apply_field_space(lst, lst2, str, ft_strlen(str));
 	if (lst2->space == 1)
 		str = apply_space(str);
-	ft_putstr(str);
+	return (write_char(lst, str, 0));
 }
 
-int			ft_printf(const char *format, ...)
+t_printf		ft_printf_bis(const char *format, va_list argptr, t_printf *lst)
 {
-	va_list	argptr;
-	int		i;
-
-	i = 0;
-	va_start(argptr, format);
-	while (format[i] != '\0')
+	if (format[lst->i] == '%' && format[lst->i + 1] == '%')
 	{
-		if (format[i] == '%' && format[i + 1] == '%')
-		{
-			ft_putchar('%');
-			i++;
-		}
-		else if (format[i] == '%')
-		{
-			i = seek_types(++i, format, argptr);
-			i--;
-		}
-		else
-			ft_putchar(format[i]);
-		i++;
+		ft_putchar('%');
+		lst->i++;
+		lst->i2++;
 	}
-	return (/*nombre de caractere imprime*/1);
+	else if (format[lst->i] == '%')
+	{
+		lst->i++;
+		*lst = seek_types(lst, format, argptr);
+		lst->i--;
+	}
+	else
+	{
+		ft_putchar(format[lst->i]);
+		lst->i2++;
+	}
+	lst->i++;
+	return (*lst);
 }
 
-/*int			main(void)
+int				ft_printf(const char *format, ...)
 {
-	char *ptr;
+	va_list		argptr;
+	t_printf	*lst;
+
+	lst = (t_printf*)malloc(sizeof(t_printf));
+	lst->i = 0;
+	lst->i2 = 0;
+	va_start(argptr, format);
+	while (format[lst->i] != '\0')
+	{
+		*lst = ft_printf_bis(format, argptr, lst);
+	}
+	return (lst->i2);
+}
+/*
+int				main(void)
+{
+	char		*ptr;
 
 	ptr = "hey";
-	ft_printf("\n");
-}
-	ft_printf("d %+19.19d o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%", 42, 1234567, -1, (unsigned long)4294967296, (short)-922337203685477580,(short)42, 1234567);
-	printf("\nd %+19.19d o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%", 42, 1234567, -1, (unsigned long)4294967296, (short)-922337203685477580,(short)42, 1234567);
+	printf("\n%.10o\n" , 42);
+	ft_printf("\nd %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%", 42, 1234567, -1, (unsigned long)4294967296, (short)-922337203685477580,(short)42, 1234567);
+	printf("\nd %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%",  42, 1234567, -1, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 }*/

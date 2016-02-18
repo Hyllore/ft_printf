@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/17 16:11:59 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/18 14:25:11 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,28 +77,26 @@ t_flags			seek_flags(t_flags *lst2, char *t)
 	return (*lst2);
 }
 
-int				seek_types(int i, const char *format, va_list argptr)
+t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
 {
-	t_printf	*lst;
 	t_flags		*lst2;
 	char		*t;
 
 	lst2 = (t_flags*)malloc(sizeof(t_flags));
-	lst = (t_printf*)malloc(sizeof(t_printf));
 	t = (char*)malloc(sizeof(char) * 2);
-	while ((t = ft_strchr("#-+ 0", format[i])) != NULL)
+	while ((t = ft_strchr("#-+ 0", format[lst->i])) != NULL)
 	{
 		*lst2 = seek_flags(lst2, t);
-		i++;
+		lst->i++;
 	}
-	*lst = seek_field_precision(lst, format, i, argptr);
-	while ((format[i] >= '0' && format[i] <= '9')
-			|| format[i] == '*' || format[i] == '.')
-		i++;
-	*lst = seek_len_modif_types(lst, format, i);
-	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[i])) != NULL
-			&& format[i] != '\0')
-		i++;
-	apply_flags(lst, lst2, argptr, NULL);
-	return (i);
+	*lst = seek_field_precision(lst, format, lst->i, argptr);
+	while ((format[lst->i] >= '0' && format[lst->i] <= '9')
+			|| format[lst->i] == '*' || format[lst->i] == '.')
+		lst->i++;
+	*lst = seek_len_modif_types(lst, format, lst->i);
+	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
+			&& format[lst->i] != '\0')
+		lst->i++;
+	*lst = apply_flags(lst, lst2, argptr, NULL);
+	return (*lst);
 }
