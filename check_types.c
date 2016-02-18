@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 14:25:11 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/18 15:04:37 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
 		*lst2 = seek_flags(lst2, t);
 		lst->i++;
 	}
+	free(t);
 	*lst = seek_field_precision(lst, format, lst->i, argptr);
 	while ((format[lst->i] >= '0' && format[lst->i] <= '9')
 			|| format[lst->i] == '*' || format[lst->i] == '.')
