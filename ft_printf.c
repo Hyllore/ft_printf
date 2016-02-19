@@ -6,13 +6,14 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 15:28:24 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/19 18:39:18 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 #include <locale.h>
+#include <limits.h>
 
 t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 		char *str)

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 12:58:10 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/19 18:28:50 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ char			*len_modif_l_z(t_printf *lst, char *str, va_list argptr,
 char			*len_modif_h_j(t_printf *lst, char *str, va_list argptr,
 		long long i);
 char			*len_modif_l_z2(t_printf *lst, char *str, va_list argptr,
-		long long i);
+		unsigned long long i);
 char			*len_modif_h_j2(t_printf *lst, char *str, va_list argptr,
-		long long i);
+		unsigned long long i);
 t_printf		write_char(t_printf *lst, char *str, int i);
 t_printf		ft_printf_bis(const char *format, va_list argptr,
 		t_printf *lst);
 char			*db(long long i, char *str);
+char			*db2(unsigned long long i, char *str);
 long long		plus(long long i);
 char			*ft_unicode(wchar_t c);
 t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2);
