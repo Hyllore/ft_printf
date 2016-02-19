@@ -6,12 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 17:41:55 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/19 15:28:24 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <locale.h>
 
 t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 		char *str)
@@ -20,7 +21,7 @@ t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 				&& lst->len_modif[0] != 'l' && lst->len_modif[0] != 'j' &&
 				lst->len_modif[0] != 'z'))
 		str = take_type1(lst, lst2, str, argptr);
-	if ((ft_strchr("sSpcC", lst->type)) != NULL)
+	if ((ft_strchr("sSpc", lst->type)) != NULL)
 		str = take_type2(lst, str, argptr);
 	if (lst->len_modif[0] == 'h' || lst->len_modif[0] == 'l' ||
 			lst->len_modif[0] == 'j' || lst->len_modif[0] == 'z')
@@ -78,16 +79,25 @@ int				ft_printf(const char *format, ...)
 	{
 		*lst = ft_printf_bis(format, argptr, lst);
 	}
-	free(lst);
+	va_end(argptr);
+//	free(lst);
 	return (lst->i2);
 }
-
+/*
 int				main(void)
 {
 	char		*ptr;
 
-	ptr = "hey";
-	printf("\n%C\n" , -4);
-//	ft_printf("\nd %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%", 42, 1234567, -1, 4294967296, (short)-922337203685477580,(short)42, 1234567);
-	printf("\nd %C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%",434,  42, 1234567, -1, 4294967296, (short)-922337203685477580,(short)42, 1234567);
-}
+	ptr = "hey"; 
+	char* l = setlocale(LC_ALL, "");
+	if (l == NULL) {
+		printf("Locale not set\n");
+	} else {
+		printf("Locale set to %s\n", l);
+	}
+	printf("%C\n", 945);
+	printf("\n%C\n" , 40000);
+	ft_printf("\nd %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%",945, 42, 1234567, -1, 4294967296, (short)-922337203685477580,(short)42, 1234567);
+	printf("\nd %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %%%%%%",945, 42, 1234567, -1, 4294967296, (short)-922337203685477580,(short)42, 1234567);
+
+}*/

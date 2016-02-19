@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 14:22:54 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/19 12:58:10 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ t_printf		ft_printf_bis(const char *format, va_list argptr,
 		t_printf *lst);
 char			*db(long long i, char *str);
 long long		plus(long long i);
+char			*ft_unicode(wchar_t c);
+t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2);
 
 #endif

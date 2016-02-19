@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 15:04:37 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/19 13:52:34 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,35 @@ t_flags			seek_flags(t_flags *lst2, char *t)
 	return (*lst2);
 }
 
+t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
+{
+	if (lst2->minus == 1 && lst->field != -1)
+	{
+		lst->field -= 1;
+		ft_putwchar(va_arg(argptr, wchar_t));
+		lst->i2 += 2;
+		while (lst->field > 1)
+		{
+			ft_putchar(' ');
+			lst->field--;
+			lst->i2++;
+		}
+	}
+	if (lst->field != -1 && lst2->minus != 1)
+	{
+		lst->field--;
+		while (lst->field > 1)
+		{
+			ft_putchar(' ');
+			lst->field--;
+			lst->i2++;
+		}
+		ft_putwchar(va_arg(argptr, wchar_t));
+		lst->i2 += 2;
+	}
+	return (*lst);
+}
+
 t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
 {
 	t_flags		*lst2;
@@ -98,6 +127,9 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
 	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
 			&& format[lst->i] != '\0')
 		lst->i++;
-	*lst = apply_flags(lst, lst2, argptr, NULL);
+	if (ft_strchr("sSpdDioOuUxXc", lst->type) != NULL)
+		*lst = apply_flags(lst, lst2, argptr, NULL);
+	if (ft_strchr("C", lst->type) != NULL)
+		*lst = write_C(lst, argptr, lst2);
 	return (*lst);
 }

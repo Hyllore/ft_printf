@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 17:06:09 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/19 12:36:30 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ char	*put_in_maj(char *str)
 
 char	*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr)
 {
-	if ((ft_strchr("dDi", lst->type)) != NULL)
+	if ((ft_strchr("di", lst->type)) != NULL)
 		str = ft_itoa(va_arg(argptr, int));
+	if ((ft_strchr("D", lst->type)) != NULL)
+		str = ft_utoa(va_arg(argptr, long));
 	if ((ft_strchr("x", lst->type)) != NULL)
 		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 16);
 	if (lst2->diese == 1 && ft_strchr("xX", lst->type) != NULL)
@@ -58,9 +60,9 @@ char	*take_type2(t_printf *lst, char *str, va_list argptr)
 	char *tmp;
 
 	tmp = NULL;
-	if ((ft_strchr("Ss", lst->type)) != NULL)
+	if ((ft_strchr("sS", lst->type)) != NULL)
 		str = va_arg(argptr, char*);
-	if ((ft_strchr("cC", lst->type)) != NULL)
+	if ((ft_strchr("c", lst->type)) != NULL)
 	{
 		if (lst->field == -1)
 			c = (char*)malloc(sizeof(char) * 2);
@@ -70,6 +72,8 @@ char	*take_type2(t_printf *lst, char *str, va_list argptr)
 		c[1] = '\0';
 		str = c;
 	}
+//	if ((ft_strchr("C", lst->type)) != NULL)
+//		ft_putwchar(va_arg(argptr, wchar_t));
 	if (lst->type == 'p')
 	{
 		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 16);
