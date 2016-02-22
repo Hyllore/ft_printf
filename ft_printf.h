@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 18:28:50 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/22 18:12:57 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_printf
 	char		type;
 	int			i;
 	int			i2;
+	int			tmp;
 }				t_printf;
 
 int				ft_printf(const char *format, ...);
@@ -77,5 +78,9 @@ char			*db2(unsigned long long i, char *str);
 long long		plus(long long i);
 char			*ft_unicode(wchar_t c);
 t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2);
+t_printf		percent_analysis(const char *format, t_printf *lsti);
+t_printf		apply_percent(t_printf *lst);
+t_printf		add_bonus(const char *format, t_printf *lsti);
+t_printf		minus_plus(t_printf *lst);
 
 #endif

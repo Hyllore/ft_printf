@@ -6,11 +6,31 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 14:24:59 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/22 16:20:17 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_printf	add_bonus(const char *format, t_printf *lst)
+{
+	if (format[lst->i] == '-')
+		lst->type = '-';
+	else if (format[lst->i] == '0' && lst->field == -1)
+		lst->precision = 1;
+	else if (format[lst->i] == '.')
+	{
+		while (format[lst->i + 1] != '%')
+			lst->i++;
+	}
+	else if (format[lst->i] >= '0' && format[lst->i] <= '9')
+	{
+		lst->field = ft_atoi((char*)&format[lst->i]);
+		while (format[lst->i + 1] != '%')
+			lst->i++;
+	}
+	return (*lst);
+}
 
 char		*len_modif_d_i(t_printf *lst, char *str, va_list argptr)
 {

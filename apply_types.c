@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 12:37:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 17:53:53 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/22 18:11:05 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 char	*apply_diese(t_printf *lst, char *str)
 {
+	int i;
+
+	i = 0;
 	if (lst->type == 'o' || lst->type == 'O')
 		str = ft_strjoin("0", str);
-	if (lst->type == 'x' && (str[0] != '0' && str[1] != '\0'))
-		str = ft_strjoin("0x", str);
-	if (lst->type == 'X' && (str[0] != '0' && str[1] != '\0'))
-		str = ft_strjoin("0X", str);
+	while (str[i] == '0')
+		i++;
+	if (str[i] != '\0')
+	{
+		if (lst->type == 'x')
+			str = ft_strjoin("0x", str);
+		if (lst->type == 'X')
+			str = ft_strjoin("0X", str);
+	}
 	return (str);
 }
 
@@ -78,7 +86,7 @@ char	*apply_field_space(t_printf *lst, t_flags *lst2, char *str, int i)
 		while (lst->field > 0)
 		{
 			str = ft_strjoin(" ", str);
-			lst->field = ((lst->field) - 1);
+			lst->field--;
 		}
 	}
 	if (i < lst->field && lst2->minus == 1)

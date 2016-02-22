@@ -6,11 +6,24 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 14:22:59 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/22 16:42:12 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_printf	minus_plus(t_printf *lst)
+{
+	ft_putchar('%');
+	lst->i2++;
+	while (lst->field >= 2)
+	{
+		ft_putchar(' ');
+		lst->i2++;
+		lst->field--;
+	}
+	return (*lst);
+}
 
 long long	plus(long long i)
 {

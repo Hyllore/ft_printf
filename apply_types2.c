@@ -6,11 +6,34 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 15:19:02 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/22 16:42:09 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_printf	apply_percent(t_printf *lst)
+{
+	if (lst->type == '-')
+	{
+		*lst = minus_plus(lst);
+	}
+	else
+	{
+		while (lst->field >= 2)
+		{
+			if (lst->precision == 1)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+			lst->i2++;
+			lst->field--;
+		}
+		ft_putchar('%');
+		lst->i2++;
+	}
+	return (*lst);
+}
 
 t_printf	write_char(t_printf *lst, char *str, int i)
 {
