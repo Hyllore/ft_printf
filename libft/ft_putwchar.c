@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:45:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/18 17:13:53 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/23 14:46:47 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char			**putwchar_fill(char *mask, char *bin)
 	int				i;
 	int				j;
 
-	j = 	ft_strlen(bin);
+	j = ft_strlen(bin);
 	i = ft_strlen(mask);
 	i--;
 	j--;

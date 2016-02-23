@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/22 18:13:01 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/23 14:42:21 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr)
 
 char	*take_type2(t_printf *lst, char *str, va_list argptr)
 {
-	if ((ft_strchr("sS", lst->type)) != NULL)
+	if ((ft_strchr("s", lst->type)) != NULL)
 		str = va_arg(argptr, char*);
 	if ((ft_strchr("c", lst->type)) != NULL)
 	{
@@ -75,10 +75,8 @@ char	*take_type2(t_printf *lst, char *str, va_list argptr)
 	}
 	if (lst->type == 'p')
 	{
-		str = ft_itoa_base((int)va_arg(argptr, void*), 16);
-		while (ft_strlen(str) != 8)
-			str = ft_strjoin("0", str);
-		str = ft_strjoin("0x1", str);
+		str = ft_itoa_base_ull((unsigned long long)va_arg(argptr, void*), 16);
+		str = ft_strjoin("0x", str);
 	}
 	return (str);
 }

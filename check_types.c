@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/22 13:34:29 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/23 16:36:51 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,10 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
 	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
 			&& format[lst->i] != '\0')
 		lst->i++;
-	if (ft_strchr("sSpdDioOuUxXc", lst->type) != NULL)
+	if (ft_strchr("spdDioOuUxXc", lst->type) != NULL)
 		*lst = apply_flags(lst, lst2, argptr, NULL);
 	if (ft_strchr("C", lst->type) != NULL)
 		*lst = write_C(lst, argptr, lst2);
+	*lst = write_S(lst, argptr, lst2);
 	return (*lst);
 }

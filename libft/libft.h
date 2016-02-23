@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:09:59 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 18:39:14 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/23 16:59:00 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_power(int n, int power);
 void				ft_putwchar(wchar_t c);
+char				*ft_itoa_base_ull(unsigned long long value, int base);
+int					ft_putwstr(wchar_t *str);
 
 #endif

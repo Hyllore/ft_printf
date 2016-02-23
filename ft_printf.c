@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/22 18:15:09 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/23 17:23:58 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 				&& lst->len_modif[0] != 'l' && lst->len_modif[0] != 'j' &&
 				lst->len_modif[0] != 'z'))
 		str = take_type1(lst, lst2, str, argptr);
-	if ((ft_strchr("sSpc", lst->type)) != NULL)
+	if ((ft_strchr("spc", lst->type)) != NULL)
 		str = take_type2(lst, str, argptr);
 	if (lst->len_modif[0] == 'h' || lst->len_modif[0] == 'l' ||
 			lst->len_modif[0] == 'j' || lst->len_modif[0] == 'z')
@@ -112,13 +112,18 @@ int				ft_printf(const char *format, ...)
 //	free(lst);
 	return (lst->i2);
 }
-
+/*
 int				main(void)
 {
 	int ret;
 	int ret2;
 	char		*ptr;
+	wchar_t		*ptr2;
 
+	ptr2 = (wchar_t*)malloc(sizeof(char) * 3);
+	ptr2[0] = '\0';
+	ptr2[1] = '\0';
+	ptr2[2] = '\0';
 	ret = 0;
 	ret2 = 0;
 	ptr = "hey";
@@ -128,14 +133,13 @@ int				main(void)
 	} else {
 		printf("Locale set to %s\n", l);
 	}
-
-	ret = ft_printf("%se\n", NULL);
-	ret2 = printf("%se", NULL);
-//	ft_putnbr(ret);
-//	ft_putchar('\n');
-//	ft_putnbr(ret2);
+	ret2 = printf("%10S\n",ptr2);
+	ret = ft_printf("%\n",ptr2);
+	ft_putnbr(ret);
+	ft_putchar('\n');
+	ft_putnbr(ret2);
 
 //	ft_printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 //	printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 
-}
+}*/

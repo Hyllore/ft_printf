@@ -6,7 +6,7 @@
 #    By: droly <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/15 18:14:32 by droly             #+#    #+#              #
-#    Updated: 2016/02/19 15:28:22 by droly            ###   ########.fr        #
+#    Updated: 2016/02/23 15:38:47 by droly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = apply_types.c		\
 	  len_modif.c		\
 	  len_modif_d_i.c	\
 	  len_modif_o_u.c	\
-	  unicode.c
+	  unicode.c			\
+	  add_bonus.c
 
 SRCLIBFT =    ft_atoi.c			\
 			  ft_bzero.c		\
@@ -87,7 +88,9 @@ SRCLIBFT =    ft_atoi.c			\
 			  ft_putwchar.c		\
 			  ft_power.c		\
 			  ft_itoa_base.c	\
-			  ft_utoa.c
+			  ft_utoa.c			\
+			  ft_itoa_base_ull.c\
+			  ft_putwstr.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 #    By: droly <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/03 17:07:51 by droly             #+#    #+#              #
-#    Updated: 2016/02/19 12:55:52 by droly            ###   ########.fr        #
+#    Updated: 2016/02/23 15:39:27 by droly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,9 @@ SRC = ft_memset.c		\
       ft_itoa_base.c	\
       ft_putnbr_u.c		\
       ft_power.c		\
-      ft_putwchar.c
+      ft_putwchar.c		\
+      ft_putwstr.c		\
+      ft_itoa_base_ull.c\
 
 OBJ = $(SRC:.c=.o)
 

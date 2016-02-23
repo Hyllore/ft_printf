@@ -6,11 +6,27 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:31:35 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 18:31:49 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/23 17:22:55 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_printf	write_S(t_printf *lst, va_list argptr, t_flags *lst2)
+{
+	if (lst->field == -1 && lst2->minus == 0 && lst->type == 'C')
+		ft_putwchar(va_arg(argptr, wchar_t));
+	if (ft_strchr("S", lst->type) != NULL)
+	{
+		if (lst2->minus == 1 && lst->field != -1)
+			*lst = minus_1(lst, argptr);
+		if (lst2->minus != 1 && lst->field != -1)
+			*lst = minus_0(lst, argptr);
+		if (lst->field == -1 && lst2->minus == 0 && lst->type == 'S')
+			lst->i2 += ft_putwstr(va_arg(argptr, wchar_t*));
+	}
+	return (*lst);
+}
 
 char		*db2(unsigned long long i, char *str)
 {
