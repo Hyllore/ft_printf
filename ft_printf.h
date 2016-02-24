@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/23 17:22:57 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/24 17:53:39 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i);
 t_printf		seek_field_precision(t_printf *lst, const char *format,
 		int i, va_list argptr);
 t_flags			seek_flags(t_flags *lst2, char *t);
-t_printf		seek_types(t_printf *lst, const char *format, va_list argptr);
+t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
+		t_flags *lst2);
 t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 		char *str);
 char			*put_in_maj(char *str);
@@ -85,6 +86,7 @@ t_printf		minus_plus(t_printf *lst);
 t_printf		write_S(t_printf *lst, va_list argptr, t_flags *lst2);
 t_printf		minus_1(t_printf *lst, va_list argptr);
 t_printf		minus_0(t_printf *lst, va_list argptr);
+char			*precision_minus(char *str, int i2, t_printf *lst, char *c);
 
 
 #endif

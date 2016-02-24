@@ -6,7 +6,7 @@
 #    By: droly <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/15 18:14:32 by droly             #+#    #+#              #
-#    Updated: 2016/02/23 15:38:47 by droly            ###   ########.fr        #
+#    Updated: 2016/02/24 18:23:03 by droly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,8 @@ SRCLIBFT =    ft_atoi.c			\
 			  ft_itoa_base.c	\
 			  ft_utoa.c			\
 			  ft_itoa_base_ull.c\
-			  ft_putwstr.c
+			  ft_putwstr.c		\
+			  ft_utoi.c
 
 OBJ = $(SRC:.c=.o)
 

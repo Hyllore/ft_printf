@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:09:59 by droly             #+#    #+#             */
-/*   Updated: 2016/02/23 16:59:00 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/24 18:21:41 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int					ft_power(int n, int power);
 void				ft_putwchar(wchar_t c);
 char				*ft_itoa_base_ull(unsigned long long value, int base);
 int					ft_putwstr(wchar_t *str);
+unsigned long long	ft_utoi(const char *str);
 
 #endif

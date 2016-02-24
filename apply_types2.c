@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/22 16:42:09 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/24 17:51:13 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 	char	c[2];
 
 	ft_bzero(c, 2);
-	if (ft_strchr("oO", lst->type) != NULL ||
-			((int)ft_strlen(str) == lst->precision && ft_atoi(str) < 0))
-		i++;
+//	if (ft_strchr("oO", lst->type) != NULL ||
+//			((int)ft_strlen(str) == lst->precision && ft_atoi(str) < 0))
+//		i++;
+	if (str[0] == '-')
+		lst->precision++;
 	if (i < lst->precision)
 	{
 		lst->precision = ((lst->precision) - i);
@@ -90,6 +92,7 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 		{
 			c[0] = str[0];
 			str[0] = '0';
+			lst->precision--;
 		}
 		while (lst->precision > 0)
 		{
@@ -99,6 +102,8 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 		if (c[0] != 0)
 			str = ft_strjoin(c, str);
 	}
+	else if (i > lst->precision)
+		str = precision_minus(str, 0, lst, c);
 	return (str);
 }
 

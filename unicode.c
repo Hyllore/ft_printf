@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:45:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/19 12:06:12 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/24 18:51:04 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,14 @@ static char			**putwchar_fill(char *mask, char *bin)
 	return (ft_strsplit(mask, ' '));
 }
 
-char			*ft_unicode(wchar_t c)
+char				*ft_unicode(wchar_t c)
 {
-	char		*bin;
-	char		*mask;
-	char		**split;
-	int			len;
+	char			*bin;
+	char			*mask;
+	char			**split;
 
 	bin = ft_itoa_base(c, 2);
-	len = ft_strlen(bin);
-	if (len <= 7)
+	if (ft_strlen(bin) <= 7)
 	{
 		mask = malloc(sizeof(char) * 2);
 		mask[0] = (char)c;
@@ -95,9 +93,9 @@ char			*ft_unicode(wchar_t c)
 	}
 	else
 	{
-		if (len <= 11)
+		if (ft_strlen(bin) <= 11)
 			mask = ft_strdup("110xxxxx 10xxxxxx");
-		else if (len <= 16)
+		else if (ft_strlen(bin) <= 16)
 			mask = ft_strdup("1110xxxx 10xxxxxx 10xxxxxx");
 		else
 			mask = ft_strdup("11110xxx 10xxxxxx 10xxxxxx 10xxxxxx");

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/23 16:36:51 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/24 14:48:00 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 		lst->type = format[i];
 		i++;
 	}
+	if (lst->len_modif[0] == 'l' && lst->type == 's')
+		lst->type = 'S';
 	return (*lst);
 }
 
@@ -81,9 +83,9 @@ t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 {
 	if (lst2->minus == 1 && lst->field != -1)
 	{
-		lst->field -= 1;
+		lst->field -= 2;
 		ft_putwchar(va_arg(argptr, wchar_t));
-		lst->i2 += 2;
+		lst->i2 += 3;
 		while (lst->field > 1)
 		{
 			ft_putchar(' ');
@@ -93,7 +95,7 @@ t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 	}
 	if (lst->field != -1 && lst2->minus != 1)
 	{
-		lst->field--;
+		lst->field -= 2;
 		while (lst->field > 1)
 		{
 			ft_putchar(' ');
@@ -101,24 +103,22 @@ t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 			lst->i2++;
 		}
 		ft_putwchar(va_arg(argptr, wchar_t));
-		lst->i2 += 2;
+		lst->i2 += 3;
 	}
 	return (*lst);
 }
 
-t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
+t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
+		t_flags *lst2)
 {
-	t_flags		*lst2;
 	char		*t;
 
-	lst2 = (t_flags*)malloc(sizeof(t_flags));
 	t = (char*)malloc(sizeof(char) * 2);
 	while ((t = ft_strchr("#-+ 0", format[lst->i])) != NULL)
 	{
 		*lst2 = seek_flags(lst2, t);
 		lst->i++;
 	}
-	free(t);
 	*lst = seek_field_precision(lst, format, lst->i, argptr);
 	while ((format[lst->i] >= '0' && format[lst->i] <= '9')
 			|| format[lst->i] == '*' || format[lst->i] == '.')
@@ -127,10 +127,13 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr)
 	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
 			&& format[lst->i] != '\0')
 		lst->i++;
-	if (ft_strchr("spdDioOuUxXc", lst->type) != NULL)
-		*lst = apply_flags(lst, lst2, argptr, NULL);
-	if (ft_strchr("C", lst->type) != NULL)
+	if ((ft_strchr("C", lst->type) != NULL || (ft_strchr("c", lst->type) != NULL
+				&& lst->len_modif[0] == 'l')) && lst->field != -1)
 		*lst = write_C(lst, argptr, lst2);
-	*lst = write_S(lst, argptr, lst2);
+	else if ((lst->type == 'c' && lst->len_modif[0] == 'l') || lst->type == 'S'
+			|| lst->type == 'C')
+		*lst = write_S(lst, argptr, lst2);
+	else if (ft_strchr("spdDioOuUxXc", lst->type) != NULL)
+		*lst = apply_flags(lst, lst2, argptr, NULL);
 	return (*lst);
 }

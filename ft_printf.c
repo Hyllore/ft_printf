@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/23 17:23:58 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/24 18:55:49 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ t_printf		ft_printf_bis(const char *format, va_list argptr, t_printf *lst)
 		if (lst->tmp == 0)
 		{
 			lst->i++;
-			*lst = seek_types(lst, format, argptr);
+			*lst = seek_types(lst, format, argptr,
+					(t_flags*)malloc(sizeof(t_flags)));
 			lst->i--;
 		}
 	}
@@ -117,24 +118,26 @@ int				main(void)
 {
 	int ret;
 	int ret2;
-	char		*ptr;
+	wchar_t		ptr;
 	wchar_t		*ptr2;
 
 	ptr2 = (wchar_t*)malloc(sizeof(char) * 3);
-	ptr2[0] = '\0';
-	ptr2[1] = '\0';
+	ptr2[0] = 40000;
+	ptr2[1] = 40000;
 	ptr2[2] = '\0';
+	ptr = 40000;
 	ret = 0;
 	ret2 = 0;
-	ptr = "hey";
+//	ptr = "hey";
 	char* l = setlocale(LC_ALL, "");
 	if (l == NULL) {
 		printf("Locale not set\n");
 	} else {
 		printf("Locale set to %s\n", l);
 	}
-	ret2 = printf("%10S\n",ptr2);
-	ret = ft_printf("%\n",ptr2);
+	ret2 = printf("%C", ptr);
+	ret = ft_printf("%C", ptr);
+	ft_putchar('\n');
 	ft_putnbr(ret);
 	ft_putchar('\n');
 	ft_putnbr(ret2);

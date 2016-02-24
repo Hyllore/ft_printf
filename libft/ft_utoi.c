@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_utoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 18:14:37 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:20:06 by droly            ###   ########.fr       */
+/*   Created: 2016/02/24 18:19:49 by droly             #+#    #+#             */
+/*   Updated: 2016/02/24 18:21:18 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static long long	ft_add(int i, char *str1, long long dst)
+static unsigned long long	ft_add(int i, char *str1, long long dst)
 {
 	while (str1[i] != '\0' && str1[i] >= '0' && str1[i] <= '9')
 	{
@@ -22,10 +22,10 @@ static long long	ft_add(int i, char *str1, long long dst)
 	return (dst);
 }
 
-long long			ft_atoi(const char *str)
+unsigned long long			ft_utoi(const char *str)
 {
 	int				i;
-	long long		dst;
+	unsigned long long		dst;
 	char			*str1;
 	int				neg;
 
