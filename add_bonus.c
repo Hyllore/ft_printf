@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 15:37:20 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:45:29 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/25 19:11:04 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,31 @@ t_printf	minus_0(t_printf *lst, va_list argptr)
 	}
 	ft_putwstr(str);
 	lst->i2 += i;
+	return (*lst);
+}
+
+t_printf	countdmrd(t_printf *lst, va_list argptr)
+{
+	wchar_t str;
+
+	str = va_arg(argptr, wchar_t);
+	ft_putwchar(str);
+	if (str >= 0 && str <= 127)
+		lst->i2 += 1;
+	if (str >= 128 && str <= 2047)
+	{
+		lst->i2 += 2;
+		lst->field -= 1;
+	}
+	if (str >= 2048 && str <= 65535)
+	{
+		lst->i2 += 3;
+		lst->field -= 2;
+	}
+	if (str >= 65536 && str <= 1114111)
+	{
+		lst->i2 += 4;
+		lst->field -= 3;
+	}
 	return (*lst);
 }

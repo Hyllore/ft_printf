@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:55:49 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/25 19:41:53 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,16 @@ int				ft_printf(const char *format, ...)
 //	free(lst);
 	return (lst->i2);
 }
-/*
+
+#include <limits.h>
+
 int				main(void)
 {
 	int ret;
 	int ret2;
 	wchar_t		ptr;
 	wchar_t		*ptr2;
+	char c;
 
 	ptr2 = (wchar_t*)malloc(sizeof(char) * 3);
 	ptr2[0] = 40000;
@@ -135,8 +138,11 @@ int				main(void)
 	} else {
 		printf("Locale set to %s\n", l);
 	}
-	ret2 = printf("%C", ptr);
-	ret = ft_printf("%C", ptr);
+//	ft_putnbr(printf("%S", L"暖炉"));
+//	ft_putnbr(ft_printf("%S", L"暖炉"));
+//	printf("\n%O\n", 42);
+	ret2 = printf("%jo, %jo", 0, INT_MAX);
+	ret = ft_printf("%jo, %jo", 0, ULLONG_MAX);
 	ft_putchar('\n');
 	ft_putnbr(ret);
 	ft_putchar('\n');
@@ -145,4 +151,4 @@ int				main(void)
 //	ft_printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 //	printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 
-}*/
+}

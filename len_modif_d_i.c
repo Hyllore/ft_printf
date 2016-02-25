@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/02/22 16:42:12 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/25 13:28:58 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char		*len_modif_h_j(t_printf *lst, char *str, va_list argptr,
 {
 	if (lst->len_modif[0] == 'h' && lst->len_modif[1] == 'h')
 	{
-		i = va_arg(argptr, int);
+		i = (signed char)va_arg(argptr, int);
 		str = db(i, str);
 	}
 	else if (ft_strchr("h", lst->len_modif[0]) != NULL)
@@ -61,7 +61,7 @@ char		*len_modif_h_j(t_printf *lst, char *str, va_list argptr,
 	}
 	else if (ft_strchr("j", lst->len_modif[0]) != NULL)
 	{
-		i = va_arg(argptr, intmax_t);
+		i = (intmax_t)va_arg(argptr, intmax_t);
 		str = db(i, str);
 	}
 	return (str);
@@ -77,12 +77,12 @@ char		*len_modif_l_z(t_printf *lst, char *str, va_list argptr,
 	}
 	else if (ft_strchr("l", lst->len_modif[0]) != NULL)
 	{
-		i = va_arg(argptr, long);
+		i = (long)va_arg(argptr, long);
 		str = db(i, str);
 	}
 	else if (ft_strchr("z", lst->len_modif[0]) != NULL)
 	{
-		i = va_arg(argptr, size_t);
+		i = (ssize_t)va_arg(argptr, ssize_t);
 		str = db(i, str);
 	}
 	return (str);

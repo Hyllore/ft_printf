@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 17:51:13 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/25 16:06:12 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,20 @@ t_printf	apply_percent(t_printf *lst)
 
 t_printf	write_char(t_printf *lst, char *str, int i)
 {
+//	while (str[i] == ' ')
+//		i++;
+//	if ((ft_strchr("dDi", lst->type) != NULL && str[0] == '0' && str[1] == '\0') || str[i] == '\0')
+//		return (*lst);
+//	i = 0;
 	while (str[i] != '\0')
 	{
 		ft_putchar(str[i]);
 		i++;
 		lst->i2++;
 	}
+	if (ft_strchr("c", lst->type) != NULL && str[i - 1] == ' ' &&
+			str[i - 2] == ' ')
+		ft_putchar('\0');
 	return (*lst);
 }
 

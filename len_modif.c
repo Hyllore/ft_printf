@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:23:44 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/25 18:42:48 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char		*len_modif_o_u(t_printf *lst, char *str, va_list argptr,
 		str = len_modif_h_j2(lst, str, argptr, i);
 	if (ft_strchr("lz", lst->len_modif[0]))
 		str = len_modif_l_z2(lst, str, argptr, i);
-	if (ft_strchr("oOuU", lst->type) != NULL)
+	if (ft_strchr("uU", lst->type) != NULL)
 		str = apply_types2(lst, str, lst2);
 	else if (ft_strchr("xX", lst->type) != NULL)
 	{

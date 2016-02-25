@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 14:48:00 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/25 18:34:00 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 	}
 	if (lst->len_modif[0] == 'l' && lst->type == 's')
 		lst->type = 'S';
+	if (lst->type == 'U' || lst->type == 'O')
+	{
+		lst->type = ft_tolower(lst->type);
+		lst->len_modif[0] = 'l';
+		lst->len_modif[1] = '\0';
+	}
 	return (*lst);
 }
 
@@ -83,9 +89,7 @@ t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 {
 	if (lst2->minus == 1 && lst->field != -1)
 	{
-		lst->field -= 2;
-		ft_putwchar(va_arg(argptr, wchar_t));
-		lst->i2 += 3;
+		*lst = countdmrd(lst, argptr);
 		while (lst->field > 1)
 		{
 			ft_putchar(' ');
@@ -102,8 +106,7 @@ t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 			lst->field--;
 			lst->i2++;
 		}
-		ft_putwchar(va_arg(argptr, wchar_t));
-		lst->i2 += 3;
+		*lst = countdmrd(lst, argptr);
 	}
 	return (*lst);
 }
@@ -124,8 +127,9 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
 			|| format[lst->i] == '*' || format[lst->i] == '.')
 		lst->i++;
 	*lst = seek_len_modif_types(lst, format, lst->i);
-	while ((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
-			&& format[lst->i] != '\0')
+	while (((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
+			&& format[lst->i] != '\0') && (ft_strchr("SpdDioOuUxXcC",
+					format[lst->i - 1])) == NULL)
 		lst->i++;
 	if ((ft_strchr("C", lst->type) != NULL || (ft_strchr("c", lst->type) != NULL
 				&& lst->len_modif[0] == 'l')) && lst->field != -1)
