@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:19:20 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 19:41:54 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 14:00:34 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int		ft_putwstr(wchar_t *str)
 	int i;
 
 	i = 0;
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
 	while (*str)
 	{
 		if (*str >= 0 && *str <= 127)

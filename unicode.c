@@ -6,11 +6,36 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:45:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:51:04 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 12:15:22 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_printf			countQ(t_printf *lst, wchar_t c)
+{
+	if (c >= 0 && c <= 127)
+	{
+		lst->i2 += 1;
+		lst->tmp += 4;
+	}
+	if (c >= 128 && c <= 2047)
+	{
+		lst->i2 += 2;
+		lst->tmp += 3;
+	}
+	if (c >= 2048 && c <= 65535)
+	{
+		lst->i2 += 3;
+		lst->tmp += 2;
+	}
+	if (c >= 65536 && c <= 1114111)
+	{
+		lst->i2 += 4;
+		lst->tmp += 1;
+	}
+	return (*lst);
+}
 
 static uintmax_t	ft_tobase10(char *n, int base)
 {

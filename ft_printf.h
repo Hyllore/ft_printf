@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 17:05:45 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 12:39:49 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ t_printf		minus_1(t_printf *lst, va_list argptr);
 t_printf		minus_0(t_printf *lst, va_list argptr);
 char			*precision_minus(char *str, int i2, t_printf *lst, char *c);
 t_printf		countdmrd(t_printf *lst, va_list argptr);
+t_printf		countdmrd2(t_printf *lst, char *str, va_list argptr);
+t_printf		countQ(t_printf *lst, wchar_t c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:31:35 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 19:14:41 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 15:29:45 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ t_printf	write_S(t_printf *lst, va_list argptr, t_flags *lst2)
 	return (*lst);
 }
 
+t_printf	countdmrd2(t_printf *lst, char *str, va_list argptr)
+{
+	wchar_t	c;
+
+	lst->tmp = 0;
+	c = va_arg(argptr, wchar_t);
+	*lst = countQ(lst , c);
+	while (lst->tmp > 0 || *str)
+	{
+		ft_putchar(*str++);
+		lst->tmp--;
+		lst->i2++;
+	}
+	ft_putwchar(c);
+	return (*lst);
+}
+
 char		*db2(unsigned long long i, char *str)
 {
 //	i = plus(i);
@@ -61,8 +78,10 @@ char				*len_modif_h_j2(t_printf *lst, char *str, va_list argptr,
 	else if (ft_strchr("j", lst->len_modif[0]) != NULL)
 	{
 		i = (uintmax_t)va_arg(argptr, uintmax_t);
-//		i = (uintmax_t)i;
-		str = db2(i, str);
+		if (lst->type == 'o' || lst->type == 'O')
+			str = ft_itoa_base_ull(i, 8);
+		else
+			str = db2(i, str);
 	}
 	return (str);
 }

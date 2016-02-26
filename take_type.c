@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 18:21:16 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 19:09:40 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ char	*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr)
 			(lst2->zero == 1 && lst2->minus != 1))
 		lst->field -= 2;
 	if ((ft_strchr("X", lst->type)) != NULL)
-	{
-		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 16);
-		str = put_in_maj(str);
-	}
+		str = put_in_maj(ft_itoa_base((int)va_arg(argptr, unsigned int), 16));
 	if ((ft_strchr("oO", lst->type)) != NULL)
 	{
 		if (lst2->diese == 1 && lst2->zero == 1)
@@ -50,6 +47,12 @@ char	*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr)
 	}
 	if ((ft_strchr("uU", lst->type)) != NULL)
 		str = ft_utoa(va_arg(argptr, unsigned int));
+	if (str[0] == '0' && str[1] == '\0' && ft_strchr("diu", lst->type) != NULL
+			&& lst->precision == 0 && lst2->diese != 1)
+		str[0] = '\0';
+	if (str[0] == '0' && str[1] == '\0' && lst2->diese == 1 &&
+			lst->precision == -1)
+		lst2->diese = 0;
 	return (str);
 }
 

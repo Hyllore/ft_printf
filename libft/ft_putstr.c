@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 15:09:32 by droly             #+#    #+#             */
-/*   Updated: 2015/12/07 20:07:50 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 14:13:43 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr(char *str)
 	int	index;
 
 	index = 0;
-	if (!str)
+	if (str == NULL)
 		return ;
 	while (str[index] != '\0')
 	{

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 18:34:00 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 17:33:11 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 	}
 	if (lst->len_modif[0] == 'l' && lst->type == 's')
 		lst->type = 'S';
-	if (lst->type == 'U' || lst->type == 'O')
+	if (lst->type == 'U' || lst->type == 'O' || lst->type == 'D')
 	{
 		lst->type = ft_tolower(lst->type);
 		lst->len_modif[0] = 'l';
@@ -87,6 +87,9 @@ t_flags			seek_flags(t_flags *lst2, char *t)
 
 t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 {
+	char *str;
+
+	str = NULL;
 	if (lst2->minus == 1 && lst->field != -1)
 	{
 		*lst = countdmrd(lst, argptr);
@@ -99,14 +102,14 @@ t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
 	}
 	if (lst->field != -1 && lst2->minus != 1)
 	{
-		lst->field -= 2;
+		str = " ";
+		lst->field--;
 		while (lst->field > 1)
 		{
-			ft_putchar(' ');
+			str = ft_strjoin(str, " ");
 			lst->field--;
-			lst->i2++;
 		}
-		*lst = countdmrd(lst, argptr);
+		*lst = countdmrd2(lst, str, argptr);
 	}
 	return (*lst);
 }
@@ -128,7 +131,7 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
 		lst->i++;
 	*lst = seek_len_modif_types(lst, format, lst->i);
 	while (((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
-			&& format[lst->i] != '\0') && (ft_strchr("SpdDioOuUxXcC",
+			&& format[lst->i] != '\0') && (ft_strchr("sSpdDioOuUxXcC",
 					format[lst->i - 1])) == NULL)
 		lst->i++;
 	if ((ft_strchr("C", lst->type) != NULL || (ft_strchr("c", lst->type) != NULL

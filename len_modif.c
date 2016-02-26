@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 18:42:48 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 15:35:10 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ static char	*apply_types2(t_printf *lst, char *str, t_flags *lst2)
 	}
 	if ((ft_strchr("uU", lst->type)) != NULL)
 		str = ft_utoa(i);
+	if (str[0] == '0' && str[1] == '\0' && ft_strchr("uU", lst->type) != NULL
+			&& lst->precision == 0)
+		str[0] = '\0';
 	return (str);
 }
 

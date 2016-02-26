@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 12:37:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 16:17:42 by droly            ###   ########.fr       */
+/*   Updated: 2016/02/26 19:10:15 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*apply_diese(t_printf *lst, char *str)
 	int i;
 
 	i = 0;
+	if (str[0] == ' ' && str[1] == '\0' && lst->precision == 0)
+		str[0] = '\0';
 	if (lst->type == 'o' || lst->type == 'O')
 		str = ft_strjoin("0", str);
 	while (str[i] == '0')
