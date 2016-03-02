@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:31:35 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 15:29:45 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/02 18:12:23 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char				*len_modif_h_j2(t_printf *lst, char *str, va_list argptr,
 {
 	if (lst->len_modif[0] == 'h' && lst->len_modif[1] == 'h')
 	{
-		i = (unsigned int)va_arg(argptr, unsigned int);
+		i = (unsigned char)va_arg(argptr, unsigned int);
 		str = db2(i, str);
 	}
 	else if (ft_strchr("h", lst->len_modif[0]) != NULL)
@@ -92,7 +92,10 @@ char				*len_modif_l_z2(t_printf *lst, char *str, va_list argptr,
 	if (lst->len_modif[0] == 'l' && lst->len_modif[1] == 'l')
 	{
 		i = va_arg(argptr, unsigned long long);
-		str = db2(i, str);
+		if (lst->type == 'o')
+			str = ft_itoa_base_ull(i, 8);
+		else
+			str = db2(i, str);
 	}
 	else if (ft_strchr("l", lst->len_modif[0]) != NULL && lst->type == 'o')
 		str = ft_itoa_base_ull((unsigned long)va_arg(argptr, unsigned long), 8);
@@ -106,5 +109,9 @@ char				*len_modif_l_z2(t_printf *lst, char *str, va_list argptr,
 		i = (size_t)va_arg(argptr, size_t);
 		str = db2(i, str);
 	}
+	if (lst->type == 'o' && str[0] == '0' && str[1] == '\0'
+			&& lst->len_modif[0] == 'l' && (lst->precision == 0 ||
+				lst->precision == -2))
+		str[0] = '\0';
 	return (str);
 }

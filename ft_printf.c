@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 19:10:25 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/02 18:12:25 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 		str = apply_len_modif(lst, str, argptr, lst2);
 	if (lst->field != -1 && lst2->zero == 1 && lst2->minus != 1)
 		str = apply_field_zero(lst, lst2, str, ft_strlen(str));
-//	ft_putstr(str);
-	if (lst->precision != -1 && (ft_strchr("dDioOuUxX", lst->type)) != NULL)
+	if (lst->precision >= 0 && (ft_strchr("dDioOuUxX", lst->type)) != NULL)
 		str = apply_precision_num(lst, str, ft_strlen(str));
 	if (lst2->diese == 1)
 		str = apply_diese(lst, str);
 	if (lst2->plus == 1)
 		str = apply_plus(str);
-	if (lst->precision != -1 && (ft_strchr("sS", lst->type)) != NULL)
+	if (lst->precision >= 0 && (ft_strchr("sS", lst->type)) != NULL)
 		str = apply_precision_str(lst, str);
 	if (lst->field != -1 || lst2->zero != 1)
 		str = apply_field_space(lst, lst2, str, ft_strlen(str));
@@ -144,8 +143,8 @@ int				main(void)
 //	printf("\n%O\n", 42);
 //	
 //	printf("%#o", 0);
-	ret2 = printf("p%#.o, %#.0o\n", 0, 0);
-	ret = ft_printf("m%#.o, %#.0o\n", 0, 0);
+	ret2 = printf("%.o, %O", 0, 0);
+	ret = ft_printf("%.o, %O", 0, 0);
 	ft_putchar('\n');
 	ft_putnbr(ret);
 	ft_putchar('\n');

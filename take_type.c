@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/29 14:42:25 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 19:09:40 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/02 17:03:09 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,19 @@ char	*take_type1(t_printf *lst, t_flags *lst2, char *str, va_list argptr)
 	}
 	if ((ft_strchr("uU", lst->type)) != NULL)
 		str = ft_utoa(va_arg(argptr, unsigned int));
-	if (str[0] == '0' && str[1] == '\0' && ft_strchr("diu", lst->type) != NULL
-			&& lst->precision == 0 && lst2->diese != 1)
+	if ((str[0] == '0' && str[1] == '\0' && ft_strchr("diuxXoO", lst->type) != NULL
+			&& lst->precision == 0 && lst2->diese != 1) || (ft_strchr("oO", lst->type) != NULL && lst->precision == -2))
 		str[0] = '\0';
 	if (str[0] == '0' && str[1] == '\0' && lst2->diese == 1 &&
-			lst->precision == -1)
+			(lst->precision == -1 || lst->precision == -2))
+	{
+		if (ft_strchr("xX", lst->type) != NULL && lst->precision == -2)
+			str[0] = '\0';
 		lst2->diese = 0;
+	}
+	if (lst2->diese == 1 && lst->precision > 0 &&
+			ft_strchr("xX", lst->type) == NULL)
+		lst->precision--;
 	return (str);
 }
 
@@ -62,13 +69,15 @@ char	*take_type2(t_printf *lst, char *str, va_list argptr)
 		str = va_arg(argptr, char*);
 		if ((ft_strchr("s", lst->type)) != NULL && str == NULL)
 			str = "(null)";
+		if (lst->precision == -2)
+			str = "\0";
 	if ((ft_strchr("c", lst->type)) != NULL)
 	{
 		if (lst->field == -1)
 			str = (char*)malloc(sizeof(char) * 2);
 		if (lst->field != -1)
 			str = (char*)malloc(sizeof(char) * (lst->field) - 1);
-		str[0] = va_arg(argptr, int);
+		str[0] = (char)va_arg(argptr, int);
 		str[1] = '\0';
 		if (str[0] == 0)
 		{

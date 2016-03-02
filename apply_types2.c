@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 18:53:26 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/02 12:03:23 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,6 @@ char		*apply_precision_num(t_printf *lst, char *str, int i)
 	char	c[2];
 
 	ft_bzero(c, 2);
-//	if (ft_strchr("oO", lst->type) != NULL ||
-//			((int)ft_strlen(str) == lst->precision && ft_atoi(str) < 0))
-//		i++;
 	if (str[0] == '-')
 		lst->precision++;
 	if (i < lst->precision)

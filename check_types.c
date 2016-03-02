@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 17:33:11 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/02 15:10:12 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,12 @@ t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i)
 	return (*lst);
 }
 
-t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
-		va_list argptr)
+t_printf		seek_field_precision(t_printf *lst, const char *format, int i)
 {
 	lst->field = -1;
 	lst->precision = -1;
 	if (format[i] >= '0' && format[i] <= '9')
 		lst->field = ft_atoi((char*)&format[i]);
-	if (format[i] == '*')
-	{
-		lst->field = va_arg(argptr, int);
-		i++;
-	}
 	while (format[i] >= '0' && format[i] <= '9')
 		i++;
 	if (format[i] == '.' && format[i + 1] >= '0' && format[i + 1] <= '9')
@@ -62,9 +56,9 @@ t_printf		seek_field_precision(t_printf *lst, const char *format, int i,
 	}
 	while (format[i] >= '0' && format[i] <= '9')
 		i++;
-	if (format[i] == '.' && format[i + 1] == '*')
+	if (format[i] == '.' && (format[i + 1] <= '0' || format[i + 1] >= '9'))
 	{
-		lst->precision = va_arg(argptr, int);
+		lst->precision = -2;
 		i++;
 	}
 	return (*lst);
@@ -125,9 +119,9 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
 		*lst2 = seek_flags(lst2, t);
 		lst->i++;
 	}
-	*lst = seek_field_precision(lst, format, lst->i, argptr);
+	*lst = seek_field_precision(lst, format, lst->i);
 	while ((format[lst->i] >= '0' && format[lst->i] <= '9')
-			|| format[lst->i] == '*' || format[lst->i] == '.')
+			|| format[lst->i] == '.')
 		lst->i++;
 	*lst = seek_len_modif_types(lst, format, lst->i);
 	while (((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL

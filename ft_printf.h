@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 12:39:49 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/02 15:09:58 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ typedef struct	s_printf
 
 int				ft_printf(const char *format, ...);
 t_printf		seek_len_modif_types(t_printf *lst, const char *format, int i);
-t_printf		seek_field_precision(t_printf *lst, const char *format,
-		int i, va_list argptr);
+t_printf		seek_field_precision(t_printf *lst, const char *format, int i);
 t_flags			seek_flags(t_flags *lst2, char *t);
 t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
 		t_flags *lst2);
