@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 16:31:16 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:38:42 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 17:08:39 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		aux_dix(unsigned long long n, char *ans, int *p)
 
 static void		aux(unsigned long long n, unsigned int b, char *ans, int *p)
 {
-	char	*base;
+	char		*base;
 
 	base = "0123456789abcdef";
 	if (n >= b)
@@ -29,10 +29,10 @@ static void		aux(unsigned long long n, unsigned int b, char *ans, int *p)
 	ans[(*p)++] = base[n % b];
 }
 
-char		*ft_itoa_base_ull(unsigned long long value, int base)
+char			*ft_itoa_base_ull(unsigned long long value, int base)
 {
-	char	*ans;
-	int		p;
+	char		*ans;
+	int			p;
 
 	if (base < 2 || 16 < base
 			|| !(ans = (char *)malloc(sizeof(char) * 35)))

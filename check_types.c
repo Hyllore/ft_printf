@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/03/02 15:10:12 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 18:11:17 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_flags			seek_flags(t_flags *lst2, char *t)
 	return (*lst2);
 }
 
-t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2)
+t_printf		write_c(t_printf *lst, va_list argptr, t_flags *lst2)
 {
 	char *str;
 
@@ -124,16 +124,15 @@ t_printf		seek_types(t_printf *lst, const char *format, va_list argptr,
 			|| format[lst->i] == '.')
 		lst->i++;
 	*lst = seek_len_modif_types(lst, format, lst->i);
-	while (((ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i])) != NULL
-			&& format[lst->i] != '\0') && (ft_strchr("sSpdDioOuUxXcC",
-					format[lst->i - 1])) == NULL)
+	while (ft_strchr("hljzsSpdDioOuUxXcC", format[lst->i]) != NULL
+				&& ft_strchr("sSpdDioOuUxXcC", format[lst->i - 1]) == NULL)
 		lst->i++;
 	if ((ft_strchr("C", lst->type) != NULL || (ft_strchr("c", lst->type) != NULL
 				&& lst->len_modif[0] == 'l')) && lst->field != -1)
-		*lst = write_C(lst, argptr, lst2);
+		*lst = write_c(lst, argptr, lst2);
 	else if ((lst->type == 'c' && lst->len_modif[0] == 'l') || lst->type == 'S'
 			|| lst->type == 'C')
-		*lst = write_S(lst, argptr, lst2);
+		*lst = write_s(lst, argptr, lst2);
 	else if (ft_strchr("spdDioOuUxXc", lst->type) != NULL)
 		*lst = apply_flags(lst, lst2, argptr, NULL);
 	return (*lst);

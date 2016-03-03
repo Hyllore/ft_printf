@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/03/02 18:12:25 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 19:09:42 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_printf		percent_analysis(const char *format, t_printf *lst)
 	else
 	{
 		lst->tmp = 0;
-		return(*lst);
+		return (*lst);
 	}
 	return (apply_percent(lst));
 }
@@ -110,10 +110,9 @@ int				ft_printf(const char *format, ...)
 		*lst = ft_printf_bis(format, argptr, lst);
 	}
 	va_end(argptr);
-//	free(lst);
 	return (lst->i2);
 }
-/*
+
 #include <limits.h>
 
 int				main(void)
@@ -138,13 +137,8 @@ int				main(void)
 	} else {
 		printf("Locale set to %s\n", l);
 	}
-//	ft_putnbr(printf("%S", L"暖炉"));
-//	ft_putnbr(ft_printf("%S", L"暖炉"));
-//	printf("\n%O\n", 42);
-//	
-//	printf("%#o", 0);
-	ret2 = printf("%.o, %O", 0, 0);
-	ret = ft_printf("%.o, %O", 0, 0);
+	ret2 = printf("% u|%+u", 42, 42);
+	ret = ft_printf("%.o, % +i", 0, 0);
 	ft_putchar('\n');
 	ft_putnbr(ret);
 	ft_putchar('\n');
@@ -153,4 +147,4 @@ int				main(void)
 //	ft_printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 //	printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
 
-}*/
+}

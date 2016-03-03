@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:45:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/23 14:46:47 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 16:59:06 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ static char			**putwchar_fill(char *mask, char *bin)
 	return (ft_strsplit(mask, ' '));
 }
 
-void			ft_putwchar(wchar_t c)
+void				ft_putwchar(wchar_t c)
 {
-	char		*bin;
-	char		*mask;
-	char		**split;
-	int			len;
+	char			*bin;
+	char			*mask;
+	char			**split;
+	int				len;
 
 	bin = ft_itoa_base(c, 2);
 	len = ft_strlen(bin);

@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 12:11:22 by droly             #+#    #+#             */
-/*   Updated: 2016/03/02 15:09:58 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 18:33:45 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,18 @@ char			*db(long long i, char *str);
 char			*db2(unsigned long long i, char *str);
 long long		plus(long long i);
 char			*ft_unicode(wchar_t c);
-t_printf		write_C(t_printf *lst, va_list argptr, t_flags *lst2);
+t_printf		write_c(t_printf *lst, va_list argptr, t_flags *lst2);
 t_printf		percent_analysis(const char *format, t_printf *lsti);
 t_printf		apply_percent(t_printf *lst);
 t_printf		add_bonus(const char *format, t_printf *lsti);
 t_printf		minus_plus(t_printf *lst);
-t_printf		write_S(t_printf *lst, va_list argptr, t_flags *lst2);
+t_printf		write_s(t_printf *lst, va_list argptr, t_flags *lst2);
 t_printf		minus_1(t_printf *lst, va_list argptr);
 t_printf		minus_0(t_printf *lst, va_list argptr);
 char			*precision_minus(char *str, int i2, t_printf *lst, char *c);
 t_printf		countdmrd(t_printf *lst, va_list argptr);
 t_printf		countdmrd2(t_printf *lst, char *str, va_list argptr);
-t_printf		countQ(t_printf *lst, wchar_t c);
+t_printf		countq(t_printf *lst, wchar_t c);
+char			*special(char *str, va_list argptr, t_printf *lst);
 
 #endif

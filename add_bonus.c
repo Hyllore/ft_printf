@@ -6,13 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 15:37:20 by droly             #+#    #+#             */
-/*   Updated: 2016/02/25 19:11:04 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 16:48:38 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*precision_minus(char *str, int i2, t_printf *lst, char *c)
+char		*precision_minus(char *str, int i2, t_printf *lst, char *c)
 {
 	lst->precision = ft_strlen(str) - lst->precision;
 	if (str[0] == '-' && str[1] == '0')
@@ -35,9 +35,9 @@ char	*precision_minus(char *str, int i2, t_printf *lst, char *c)
 	return (str);
 }
 
-static int		count(wchar_t *str)
+static int	count(wchar_t *str)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (*str)
@@ -70,8 +70,8 @@ t_printf	minus_1(t_printf *lst, va_list argptr)
 
 t_printf	minus_0(t_printf *lst, va_list argptr)
 {
-	int i;
-	wchar_t *str;
+	int		i;
+	wchar_t	*str;
 
 	i = 0;
 	str = va_arg(argptr, wchar_t*);
@@ -90,23 +90,23 @@ t_printf	minus_0(t_printf *lst, va_list argptr)
 
 t_printf	countdmrd(t_printf *lst, va_list argptr)
 {
-	wchar_t str;
+	wchar_t	str;
 
 	str = va_arg(argptr, wchar_t);
 	ft_putwchar(str);
-	if (str >= 0 && str <= 127)
+	if (str >= 0x00 && str <= 0x7F)
 		lst->i2 += 1;
-	if (str >= 128 && str <= 2047)
+	if (str >= 0x80 && str <= 0x7FF)
 	{
 		lst->i2 += 2;
 		lst->field -= 1;
 	}
-	if (str >= 2048 && str <= 65535)
+	if (str >= 0x800 && str <= 0xFFFF)
 	{
 		lst->i2 += 3;
 		lst->field -= 2;
 	}
-	if (str >= 65536 && str <= 1114111)
+	if (str >= 0x10000 && str <= 0x10FFFF)
 	{
 		lst->i2 += 4;
 		lst->field -= 3;

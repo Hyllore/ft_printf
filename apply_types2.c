@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 18:06:14 by droly             #+#    #+#             */
-/*   Updated: 2016/03/02 12:03:23 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 16:53:32 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ t_printf	apply_percent(t_printf *lst)
 
 t_printf	write_char(t_printf *lst, char *str, int i)
 {
-//	while (str[i] == ' ')
-//		i++;
-//	if ((ft_strchr("dDi", lst->type) != NULL && str[0] == '0' && str[1] == '\0') || str[i] == '\0')
-//		return (*lst);
-//	i = 0;
 	while (str[i] != '\0')
 	{
 		ft_putchar(str[i]);
@@ -69,9 +64,9 @@ char		*apply_precision_str(t_printf *lst, char *str)
 			while (lst->precision > 0)
 			{
 				i = 0;
-				tmp = ft_memalloc(ft_strlen(str));
+				tmp = ft_strnew(ft_strlen(str));
 				ft_strcpy(tmp, str);
-				str = ft_memalloc(ft_strlen(tmp));
+				str = ft_strnew(ft_strlen(tmp));
 				ft_strcpy(str, tmp);
 				while (str[i + 1] != '\0')
 					i++;

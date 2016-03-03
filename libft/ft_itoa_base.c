@@ -6,20 +6,20 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 16:31:16 by droly             #+#    #+#             */
-/*   Updated: 2016/02/23 13:02:07 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 17:01:01 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		aux_dix(int n, char *ans, int *p)
+static void	aux_dix(int n, char *ans, int *p)
 {
 	if (n < -9 || 9 < n)
 		aux_dix(n / 10, ans, p);
 	ans[(*p)++] = '0' + ((n % 10) < 0 ? -(n % 10) : (n % 10));
 }
 
-static void		aux(unsigned int n, unsigned int b, char *ans, int *p)
+static void	aux(unsigned int n, unsigned int b, char *ans, int *p)
 {
 	char	*base;
 

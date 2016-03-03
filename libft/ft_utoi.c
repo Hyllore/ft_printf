@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 18:19:49 by droly             #+#    #+#             */
-/*   Updated: 2016/02/24 18:21:18 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 16:58:32 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static unsigned long long	ft_add(int i, char *str1, long long dst)
 
 unsigned long long			ft_utoi(const char *str)
 {
-	int				i;
+	int						i;
 	unsigned long long		dst;
-	char			*str1;
-	int				neg;
+	char					*str1;
+	int						neg;
 
 	neg = 0;
 	dst = 0;

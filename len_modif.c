@@ -6,11 +6,28 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/17 14:03:51 by droly             #+#    #+#             */
-/*   Updated: 2016/03/02 16:38:42 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 18:32:51 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char		*special(char *str, va_list argptr, t_printf *lst)
+{
+	if ((ft_strchr("di", lst->type)) != NULL)
+		str = ft_itoa(va_arg(argptr, int));
+	if ((ft_strchr("D", lst->type)) != NULL)
+		str = ft_utoa(va_arg(argptr, long));
+	if ((ft_strchr("x", lst->type)) != NULL)
+		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 16);
+	if ((ft_strchr("X", lst->type)) != NULL)
+		str = put_in_maj(ft_itoa_base((int)va_arg(argptr, unsigned int), 16));
+	if ((ft_strchr("oO", lst->type)) != NULL)
+		str = ft_itoa_base((int)va_arg(argptr, unsigned int), 8);
+	if ((ft_strchr("uU", lst->type)) != NULL)
+		str = ft_utoa(va_arg(argptr, unsigned int));
+	return (str);
+}
 
 t_printf	add_bonus(const char *format, t_printf *lst)
 {

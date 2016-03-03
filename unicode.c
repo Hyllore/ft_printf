@@ -6,13 +6,13 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/18 16:45:14 by droly             #+#    #+#             */
-/*   Updated: 2016/02/26 12:15:22 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/03 16:54:04 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_printf			countQ(t_printf *lst, wchar_t c)
+t_printf			countq(t_printf *lst, wchar_t c)
 {
 	if (c >= 0 && c <= 127)
 	{
