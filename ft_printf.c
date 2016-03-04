@@ -6,18 +6,24 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:53:32 by droly             #+#    #+#             */
-/*   Updated: 2016/03/03 19:09:42 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/04 12:17:57 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-#include <locale.h>
-#include <limits.h>
+
+static t_printf	field_diese(t_printf *lst, t_flags *lst2)
+{
+	if (ft_strchr("xX", lst->type) != NULL && lst2->diese == 1 &&
+			lst->field > 2 && lst2->zero == 1)
+		lst->field -= 2;
+	return (*lst);
+}
 
 t_printf		apply_flags(t_printf *lst, t_flags *lst2, va_list argptr,
 		char *str)
 {
+	*lst = field_diese(lst, lst2);
 	if ((ft_strchr("dDioOuUxX", lst->type)) != NULL && (lst->len_modif[0] != 'h'
 				&& lst->len_modif[0] != 'l' && lst->len_modif[0] != 'j' &&
 				lst->len_modif[0] != 'z'))
@@ -111,40 +117,4 @@ int				ft_printf(const char *format, ...)
 	}
 	va_end(argptr);
 	return (lst->i2);
-}
-
-#include <limits.h>
-
-int				main(void)
-{
-	int ret;
-	int ret2;
-	wchar_t		ptr;
-	wchar_t		*ptr2;
-	char c;
-
-	ptr2 = (wchar_t*)malloc(sizeof(char) * 3);
-	ptr2[0] = 0;
-	ptr2[1] = '\0';
-	ptr2[2] = '\0';
-	ptr = 40000;
-	ret = 0;
-	ret2 = 0;
-//	ptr = "hey";
-	char* l = setlocale(LC_ALL, "");
-	if (l == NULL) {
-		printf("Locale not set\n");
-	} else {
-		printf("Locale set to %s\n", l);
-	}
-	ret2 = printf("% u|%+u", 42, 42);
-	ret = ft_printf("%.o, % +i", 0, 0);
-	ft_putchar('\n');
-	ft_putnbr(ret);
-	ft_putchar('\n');
-	ft_putnbr(ret2);
-
-//	ft_printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
-//	printf("\n%#8x %p d %10C %+19.19D o %#18.19o x %#12.20x X %-12.20lX d %+12.20hd d %+12.20hd u %12.20u %# +03.5hh% %-05% %   % %%%%%%",42,ptr,945, 42, 1234567, 0, 4294967296, (short)-922337203685477580,(short)42, 1234567);
-
 }

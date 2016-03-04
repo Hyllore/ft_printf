@@ -6,7 +6,7 @@
 /*   By: droly <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 14:36:14 by droly             #+#    #+#             */
-/*   Updated: 2016/03/03 18:11:17 by droly            ###   ########.fr       */
+/*   Updated: 2016/03/04 11:28:29 by droly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ t_flags			seek_flags(t_flags *lst2, char *t)
 		lst2->space = 1;
 	if (t[0] == '0')
 		lst2->zero = 1;
+	if (lst2->plus == 1 && lst2->space == 1)
+		lst2->space = 0;
+	if (lst2->zero == 1 && lst2->minus == 1)
+		lst2->zero = 0;
 	return (*lst2);
 }
 
